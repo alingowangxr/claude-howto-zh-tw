@@ -279,6 +279,12 @@ Use both together:
 - **`/rewind`** - Alternative way to access checkpoints
 - **`/checkpoint`** - Alias for `/rewind`
 
+## Knowing When to Rewind: Context Monitoring
+
+Checkpoints let you go back — but how do you know *when* you should? As your conversation grows, Claude's context window fills up and model quality silently degrades. You might be shipping code from a half-blind model without realizing it.
+
+**[cc-context-stats](https://github.com/luongnv89/cc-context-stats)** solves this by adding real-time **context zones** to your Claude Code status bar. It tracks where you are in the context window — from **Plan** (green, safe to plan and code) through **Code** (yellow, avoid starting new plans) to **Dump** (orange, finish up and rewind). When you see the zone shift, you know it's time to checkpoint and start fresh instead of pushing through with degraded output.
+
 ## Related Concepts
 
 - **[Advanced Features](../09-advanced-features/)** - Planning mode and other advanced capabilities
