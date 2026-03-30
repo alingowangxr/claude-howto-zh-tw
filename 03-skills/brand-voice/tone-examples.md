@@ -1,4 +1,4 @@
-# Brand Voice Tone Examples
+# Brand Voice Tone Examples / 品牌语气示例
 
 ## 激励式公告
 

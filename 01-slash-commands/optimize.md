@@ -2,7 +2,7 @@
 description: 分析代码中的性能问题并提出优化建议
 ---
 
-# Code Optimization
+# Code Optimization / 代码优化
 
 请按优先级检查代码中的这些问题：
 

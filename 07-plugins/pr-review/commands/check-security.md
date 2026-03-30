@@ -3,7 +3,7 @@ name: Security Check
 description: 对当前改动执行安全导向审查
 ---
 
-# Security Check
+# Security Check / 安全检查
 
 重点检查：
 

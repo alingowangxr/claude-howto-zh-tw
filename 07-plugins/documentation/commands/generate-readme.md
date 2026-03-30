@@ -3,7 +3,7 @@ name: Generate README
 description: 创建或更新项目 README
 ---
 
-# README Generator
+# README Generator / README 生成
 
 生成 README 时至少包含：
 

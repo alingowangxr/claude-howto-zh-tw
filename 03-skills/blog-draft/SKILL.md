@@ -3,6 +3,8 @@ name: blog-draft
 description: 根据想法和资料起草博客文章。Use when users want to draft a blog post, write an article from research, or turn notes/resources into a structured post.
 ---
 
+# Blog Draft / 博客草稿生成
+
 ## User Input
 
 ```text

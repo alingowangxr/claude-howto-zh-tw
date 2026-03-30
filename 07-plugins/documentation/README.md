@@ -3,7 +3,7 @@
   <img alt="Claude How To" src="../../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Documentation Plugin
+# Documentation 插件
 
 用于把 API 文档、README 生成、文档同步和文档校验打包成一套方案。
 

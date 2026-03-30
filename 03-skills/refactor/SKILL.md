@@ -3,7 +3,7 @@ name: code-refactor
 description: 基于 Martin Fowler 方法论做系统化重构。Use when users ask to refactor code, improve structure, reduce technical debt, clean up legacy code, or improve maintainability.
 ---
 
-# Code Refactoring Skill
+# Code Refactoring Skill / 重构技能
 
 这个 skill 用于安全、渐进式地做重构，重点强调：
 

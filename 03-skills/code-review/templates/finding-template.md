@@ -1,4 +1,4 @@
-# Code Review Finding Template
+# Code Review Finding Template / 审查问题模板
 
 ## Issue: [TITLE]
 

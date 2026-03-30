@@ -3,6 +3,8 @@ name: claude-md
 description: 按最佳实践创建或更新 CLAUDE.md，帮助 AI agent 更快理解项目。Use when users want to create, update, audit, or improve a CLAUDE.md file.
 ---
 
+# CLAUDE.md / 项目记忆整理
+
 ## User Input
 
 ```text

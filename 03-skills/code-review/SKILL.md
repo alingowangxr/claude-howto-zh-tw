@@ -3,7 +3,7 @@ name: code-review-specialist
 description: 综合代码审查 skill，覆盖安全、性能、代码质量和可维护性。Use when users ask to review code, analyze code quality, evaluate pull requests, or mention code review, security analysis, or performance optimization.
 ---
 
-# Code Review Skill
+# Code Review Skill / 代码审查技能
 
 这个 skill 用于做结构化代码审查，重点关注：
 

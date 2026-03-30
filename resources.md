@@ -1,4 +1,4 @@
-# Resources Overview
+# 资源总览
 
 仓库里的 `resources/` 目录主要存放：
 

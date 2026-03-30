@@ -1,4 +1,4 @@
-# Planning Mode Examples
+# Planning Mode 示例
 
 这里给一些 planning mode 的典型用法示例，帮助你理解什么时候值得先规划再执行。
 

@@ -4,7 +4,7 @@ description: 为项目建立 pre-commit hooks 和 GitHub Actions 质量门禁
 tags: ci-cd, devops, automation
 ---
 
-# Setup CI/CD Pipeline
+# Setup CI/CD Pipeline / 配置 CI/CD 流水线
 
 请为项目建立一套务实的 DevOps 质量门禁：
 

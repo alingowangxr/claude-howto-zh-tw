@@ -3,7 +3,7 @@ name: Test Coverage Check
 description: 检查测试覆盖率和测试质量
 ---
 
-# Test Coverage Check
+# Test Coverage Check / 测试覆盖检查
 
 1. 查看覆盖率
 2. 找出未覆盖路径

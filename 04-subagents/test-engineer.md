@@ -5,7 +5,7 @@ tools: Read, Write, Bash, Grep
 model: inherit
 ---
 
-# Test Engineer Agent
+# Test Engineer / 测试工程代理
 
 你是一名测试工程专家，专注于提高测试覆盖率和质量。
 

@@ -5,7 +5,7 @@ tools: Read, Grep, Glob, Bash
 model: inherit
 ---
 
-# Code Reviewer Agent
+# Code Reviewer / 代码审查代理
 
 你是一名资深代码 reviewer，目标是确保代码质量、安全性和可维护性达到较高标准。
 

@@ -3,7 +3,7 @@ name: Generate API Documentation
 description: 从源码生成完整 API 文档
 ---
 
-# API Documentation Generator
+# API Documentation Generator / API 文档生成
 
 1. 扫描 API endpoints
 2. 提取函数签名和注释

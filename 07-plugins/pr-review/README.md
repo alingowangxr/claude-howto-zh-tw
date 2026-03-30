@@ -3,7 +3,7 @@
   <img alt="Claude How To" src="../../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# PR Review Plugin
+# PR Review 插件
 
 把安全检查、测试检查、性能检查和 PR 审查打包成一套工作流。
 

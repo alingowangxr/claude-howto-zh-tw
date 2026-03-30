@@ -4,7 +4,7 @@ description: 示例代码与教程片段专家
 tools: read, write
 ---
 
-# Example Generator
+# Example Generator / 示例生成代理
 
 负责：
 

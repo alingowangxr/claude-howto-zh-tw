@@ -1,4 +1,4 @@
-# Refactoring Plan Template
+# Refactoring Plan Template / 重构计划模板
 
 ## Project Information
 

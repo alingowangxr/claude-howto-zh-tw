@@ -1,4 +1,4 @@
-# ADR [Number]: [Title]
+# ADR [Number]: [Title] / 架构决策记录
 
 ## Status
 

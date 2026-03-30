@@ -1,4 +1,4 @@
-# Code Smells Catalog
+# Code Smells Catalog / 代码异味清单
 
 这是一个用于识别代码异味的简明参考表。
 

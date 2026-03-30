@@ -4,7 +4,7 @@ description: 安全导向代码审查
 tools: read, grep, diff
 ---
 
-# Security Reviewer
+# Security Reviewer / 安全审查代理
 
 专注识别：
 

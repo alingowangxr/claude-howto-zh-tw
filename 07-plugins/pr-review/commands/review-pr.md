@@ -3,7 +3,7 @@ name: Review PR
 description: 启动完整 PR 审查，包含安全、测试和性能检查
 ---
 
-# PR Review
+# PR Review / PR 审查
 
 执行完整 PR 审查，至少包含：
 

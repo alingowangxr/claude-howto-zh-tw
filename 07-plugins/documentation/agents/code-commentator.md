@@ -4,7 +4,7 @@ description: 代码注释和内联文档专家
 tools: read, write, edit
 ---
 
-# Code Commentator
+# Code Commentator / 注释改进代理
 
 负责：
 

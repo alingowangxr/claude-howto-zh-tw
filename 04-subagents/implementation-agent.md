@@ -5,7 +5,7 @@ tools: Read, Write, Edit, Bash, Grep, Glob
 model: inherit
 ---
 
-# Implementation Agent
+# Implementation Agent / 实现代理
 
 你是一名资深开发者，负责根据规格完整实现功能。
 

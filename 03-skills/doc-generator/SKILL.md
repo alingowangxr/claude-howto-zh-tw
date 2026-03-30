@@ -3,7 +3,7 @@ name: doc-generator
 description: 从源码生成准确、完整的 API 文档和技术说明。Use when creating or updating API docs, generating endpoint documentation, or when users mention API docs, endpoints, or documentation.
 ---
 
-# API Documentation Generator Skill
+# API Documentation Generator Skill / API 文档技能
 
 ## Generates
 

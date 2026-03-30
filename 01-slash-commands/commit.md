@@ -4,6 +4,8 @@ argument-hint: [message]
 description: 基于当前改动生成并执行一次 git commit
 ---
 
+# Commit / 提交改动
+
 ## Context
 
 - 当前 git 状态：!`git status`

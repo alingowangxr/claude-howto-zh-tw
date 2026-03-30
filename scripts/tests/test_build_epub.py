@@ -15,7 +15,10 @@ from build_epub import (
     ChapterCollector,
     EPUBConfig,
     ValidationError,
+    create_cover_image,
     create_chapter_html,
+    prepare_root_readme_for_epub,
+    extract_markdown_h1,
     extract_all_mermaid_blocks,
     get_chapter_order,
     sanitize_mermaid,
@@ -36,6 +39,7 @@ class TestBuildState:
         assert state.mermaid_counter == 0
         assert len(state.mermaid_cache) == 0
         assert len(state.mermaid_added_to_book) == 0
+        assert len(state.embedded_assets) == 0
         assert len(state.path_to_chapter) == 0
 
     def test_state_modification(self, state: BuildState) -> None:
@@ -43,11 +47,13 @@ class TestBuildState:
         state.mermaid_counter = 5
         state.mermaid_cache["key"] = (b"data", "file.png")
         state.mermaid_added_to_book.add("file.png")
+        state.embedded_assets.add("logo.png")
         state.path_to_chapter["README.md"] = "chap_01.xhtml"
 
         assert state.mermaid_counter == 5
         assert state.mermaid_cache["key"] == (b"data", "file.png")
         assert "file.png" in state.mermaid_added_to_book
+        assert "logo.png" in state.embedded_assets
         assert state.path_to_chapter["README.md"] == "chap_01.xhtml"
 
     def test_reset(self, state: BuildState) -> None:
@@ -55,6 +61,7 @@ class TestBuildState:
         state.mermaid_counter = 5
         state.mermaid_cache["key"] = (b"data", "file.png")
         state.mermaid_added_to_book.add("file.png")
+        state.embedded_assets.add("logo.png")
         state.path_to_chapter["README.md"] = "chap_01.xhtml"
 
         state.reset()
@@ -62,6 +69,7 @@ class TestBuildState:
         assert state.mermaid_counter == 0
         assert len(state.mermaid_cache) == 0
         assert len(state.mermaid_added_to_book) == 0
+        assert len(state.embedded_assets) == 0
         assert len(state.path_to_chapter) == 0
 
 
@@ -166,6 +174,28 @@ class TestValidation:
             validate_inputs(config, logger)
 
 
+class TestCoverGeneration:
+    """Tests for cover image generation."""
+
+    def test_create_cover_image_from_prebuilt_cover(
+        self, tmp_path: Path, logger: logging.Logger
+    ) -> None:
+        cover_path = tmp_path / "cover.png"
+        from PIL import Image as PILImage
+
+        PILImage.new("RGB", (1200, 1800), color=(240, 240, 240)).save(cover_path, "PNG")
+
+        config = EPUBConfig(
+            root_path=tmp_path,
+            output_path=tmp_path / "out.epub",
+            cover_image_path=cover_path,
+        )
+
+        cover_bytes = create_cover_image(config, logger)
+
+        assert len(cover_bytes) > 0
+
+
 # =============================================================================
 # Mermaid Processing Tests
 # =============================================================================
@@ -257,7 +287,7 @@ class TestChapterCollector:
 
         assert len(chapters) == 1
         assert chapters[0].file_path == readme
-        assert chapters[0].display_name == "Introduction"
+        assert chapters[0].display_name == "Test"
         assert chapters[0].chapter_filename == "chap_01.xhtml"
         assert state.path_to_chapter["README.md"] == "chap_01.xhtml"
 
@@ -268,7 +298,8 @@ class TestChapterCollector:
 
         assert len(chapters) == 2  # README.md and section.md
         assert chapters[0].is_folder_overview is True
-        assert chapters[0].folder_name == "Test Chapter"
+        assert chapters[0].folder_name == "Chapter Overview"
+        assert chapters[0].file_title == "概览"
         assert chapters[1].is_folder_overview is False
 
     def test_path_mapping(self, tmp_project: Path, state: BuildState) -> None:
@@ -299,13 +330,15 @@ class TestHTMLGeneration:
         html = create_chapter_html(
             display_name="Introduction",
             file_title="Introduction",
-            html_content="<p>Content</p>",
+            html_content="<h1>Introduction</h1><h2>Table of Contents</h2><p>Content</p>",
             is_overview=True,
         )
 
         assert "<!DOCTYPE html>" in html
         assert '<html xmlns="http://www.w3.org/1999/xhtml"' in html
-        assert "<h1>Introduction</h1>" in html
+        assert 'lang="zh"' in html
+        assert html.count("<h1>Introduction</h1>") == 1
+        assert "<h2>目录</h2>" in html
         assert "<p>Content</p>" in html
 
     def test_create_chapter_html_section(self) -> None:
@@ -313,12 +346,42 @@ class TestHTMLGeneration:
         html = create_chapter_html(
             display_name="Chapter",
             file_title="Section",
-            html_content="<p>Content</p>",
+            html_content="<h1>Section</h1><h2>Best Practices</h2><p>Content</p>",
             is_overview=False,
         )
 
         assert "<h2>Section</h2>" in html
-        assert "<h1>" not in html
+        assert "<h1>Section</h1>" not in html
+        assert "<h2>最佳实践</h2>" in html
+
+
+class TestMarkdownPreprocessing:
+    """Tests for markdown preprocessing helpers."""
+
+    def test_prepare_root_readme_for_epub_replaces_hero_block(self) -> None:
+        content = """<picture>old</picture>
+
+[![Badge](https://example.com/badge.svg)](https://example.com)
+
+# Claude Code 中文全面上手指南
+
+导语内容
+
+---
+
+## 目录
+
+正文内容
+"""
+
+        processed = prepare_root_readme_for_epub(content)
+
+        assert "<picture>" not in processed
+        assert "follow-qr.jpg" in processed
+        assert "luongnv89/claude-howto" in processed
+        assert processed.startswith("# Claude Code 中文全面上手指南")
+        assert "导语内容" not in processed
+        assert "## 目录" in processed
 
     def test_html_escaping(self) -> None:
         """Test that HTML special characters are escaped."""
@@ -347,13 +410,33 @@ class TestChapterOrder:
         order = get_chapter_order()
 
         assert len(order) > 0
-        assert order[0] == ("README.md", "Introduction")
+        assert order[0] == ("README.md", "首页")
 
         # Check that all expected chapters are present
         chapter_names = [name for name, _ in order]
         assert "01-slash-commands" in chapter_names
         assert "02-memory" in chapter_names
+        assert "10-cli" in chapter_names
         assert "resources.md" in chapter_names
+
+
+class TestMarkdownTitleExtraction:
+    """Tests for extracting markdown H1 titles."""
+
+    def test_extract_markdown_h1(self, tmp_path: Path) -> None:
+        md = tmp_path / "sample.md"
+        md.write_text("# 中文标题\n\n正文\n", encoding="utf-8")
+
+        assert extract_markdown_h1(md) == "中文标题"
+
+    def test_extract_markdown_h1_ignores_code_blocks(self, tmp_path: Path) -> None:
+        md = tmp_path / "sample.md"
+        md.write_text(
+            "```md\n# fake\n```\n\n# Real Title\n",
+            encoding="utf-8",
+        )
+
+        assert extract_markdown_h1(md) == "Real Title"
 
 
 # =============================================================================

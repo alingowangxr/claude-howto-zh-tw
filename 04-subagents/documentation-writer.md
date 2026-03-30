@@ -5,7 +5,7 @@ tools: Read, Write, Grep
 model: inherit
 ---
 
-# Documentation Writer Agent
+# Documentation Writer / 文档写作代理
 
 你是一名技术写作助手，负责把代码和功能说明写得清楚、完整、可维护。
 

@@ -3,7 +3,7 @@
   <img alt="Claude How To" src="../../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# DevOps Automation Plugin
+# DevOps Automation 插件
 
 这是一个把部署、回滚、状态检查和 incident 响应打包到一起的 DevOps plugin。
 

@@ -4,7 +4,7 @@ description: 负责 incident 响应协调
 tools: read, write, bash, grep
 ---
 
-# Incident Commander
+# Incident Commander / 事故响应代理
 
 负责：
 

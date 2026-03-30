@@ -59,7 +59,7 @@ import httpx
 import markdown
 from bs4 import BeautifulSoup
 from ebooklib import epub
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 from tenacity import (
     retry,
     retry_if_exception_type,
@@ -108,6 +108,7 @@ class EPUBConfig:
     # Paths
     root_path: Path
     output_path: Path
+    cover_image_path: Path | None = None
     logo_path: Path | None = None
 
     # EPUB Metadata
@@ -155,6 +156,7 @@ class BuildState:
     mermaid_cache: dict[str, tuple[bytes, str]] = field(default_factory=dict)
     mermaid_counter: int = 0
     mermaid_added_to_book: set[str] = field(default_factory=set)
+    embedded_assets: set[str] = field(default_factory=set)
     path_to_chapter: dict[str, str] = field(default_factory=dict)
 
     def reset(self) -> None:
@@ -162,6 +164,7 @@ class BuildState:
         self.mermaid_cache.clear()
         self.mermaid_counter = 0
         self.mermaid_added_to_book.clear()
+        self.embedded_assets.clear()
         self.path_to_chapter.clear()
 
 
@@ -215,11 +218,14 @@ def validate_inputs(config: EPUBConfig, logger: logging.Logger) -> None:
     elif not os.access(output_dir, os.W_OK):
         errors.append(f"Output directory is not writable: {output_dir}")
 
-    # Check logo if specified
+    # Check cover image / logo if specified
+    cover_image_path = config.cover_image_path or (
+        config.root_path / "assets/cover/epub-cover-official.png"
+    )
     logo_path = config.logo_path or (config.root_path / "claude-howto-logo.png")
-    if not logo_path.exists():
+    if not cover_image_path.exists() and not logo_path.exists():
         logger.warning(
-            f"Logo file not found: {logo_path}. Cover will be generated without logo."
+            f"Cover image not found: {cover_image_path}, and logo not found: {logo_path}. Cover will be generated without branding assets."
         )
 
     # Verify at least some markdown files exist
@@ -390,21 +396,104 @@ def extract_all_mermaid_blocks(
 def get_chapter_order() -> list[tuple[str, str]]:
     """Define the order of chapters based on folder structure."""
     return [
-        ("README.md", "Introduction"),
-        ("LEARNING-ROADMAP.md", "Learning Roadmap"),
-        ("QUICK_REFERENCE.md", "Quick Reference"),
-        ("claude_concepts_guide.md", "Claude Concepts Guide"),
+        ("README.md", "首页"),
+        ("LEARNING-ROADMAP.md", "学习路线图"),
+        ("QUICK_REFERENCE.md", "速查卡"),
+        ("claude_concepts_guide.md", "概念总览"),
         ("01-slash-commands", "Slash Commands"),
         ("02-memory", "Memory"),
         ("03-skills", "Skills"),
         ("04-subagents", "Subagents"),
-        ("05-mcp", "MCP Protocol"),
+        ("05-mcp", "MCP"),
         ("06-hooks", "Hooks"),
         ("07-plugins", "Plugins"),
         ("08-checkpoints", "Checkpoints"),
         ("09-advanced-features", "Advanced Features"),
-        ("resources.md", "Resources"),
+        ("10-cli", "CLI"),
+        ("resources.md", "资源"),
     ]
+
+
+FOLDER_LABELS = {
+    "blog-draft": "博客草稿",
+    "brand-voice": "品牌语气",
+    "claude-md": "CLAUDE.md",
+    "code-review": "代码审查",
+    "doc-generator": "文档生成",
+    "refactor": "重构",
+    "pr-review": "PR 审查",
+    "documentation": "文档插件",
+    "devops-automation": "DevOps 自动化",
+    "agents": "子代理",
+    "commands": "命令",
+    "templates": "模板",
+    "references": "参考资料",
+    "scripts": "脚本",
+    "docs": "文档",
+    "skills": "技能",
+    "hooks": "Hooks",
+}
+
+
+def extract_markdown_h1(file_path: Path) -> str | None:
+    """Extract the first H1 outside fenced code blocks."""
+    try:
+        content = file_path.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        return None
+
+    in_fence = False
+    for raw_line in content.splitlines():
+        line = raw_line.strip()
+        if line.startswith("```") or line.startswith("~~~"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        if line.startswith("# "):
+            return line[2:].strip()
+    return None
+
+
+def humanize_segment(segment: str) -> str:
+    """Convert a file or folder segment into a readable label."""
+    if segment in FOLDER_LABELS:
+        return FOLDER_LABELS[segment]
+    return segment.replace("-", " ").replace("_", " ").title()
+
+
+def infer_markdown_label(file_path: Path, fallback: str) -> str:
+    """Prefer the markdown H1, otherwise use the fallback label."""
+    return extract_markdown_h1(file_path) or fallback
+
+
+def prepare_root_readme_for_epub(md_content: str) -> str:
+    """Replace the README hero block with EPUB-friendly branding."""
+    lines = md_content.splitlines()
+    h1_index = next((i for i, line in enumerate(lines) if line.startswith("# ")), None)
+    if h1_index is None:
+        return md_content
+    first_rule_after_h1 = next(
+        (
+            i
+            for i, line in enumerate(lines[h1_index + 1 :], start=h1_index + 1)
+            if line.strip() == "---"
+        ),
+        None,
+    )
+    if first_rule_after_h1 is None:
+        return md_content
+
+    hero = """![Claude How To 中文版 Logo](claude-howto-logo.png)
+
+> 本书由 **一起 Vibe** 基于上游仓库 [`luongnv89/claude-howto`](https://github.com/luongnv89/claude-howto) 翻译与本土化整理。
+
+![一起 Vibe 小红书二维码](assets/cover/follow-qr.jpg)
+"""
+
+    heading = lines[h1_index]
+    remainder = "\n".join(lines[first_rule_after_h1:]).lstrip()
+    return f"{heading}\n\n{hero}\n\n{remainder}"
 
 
 def collect_folder_files(folder_path: Path) -> list[tuple[Path, str]]:
@@ -414,12 +503,12 @@ def collect_folder_files(folder_path: Path) -> list[tuple[Path, str]]:
     # Get README first if it exists
     readme = folder_path / "README.md"
     if readme.exists():
-        files.append((readme, "Overview"))
+        files.append((readme, infer_markdown_label(readme, "概览")))
 
     # Get all other markdown files
     for md_file in sorted(folder_path.glob("*.md")):
         if md_file.name != "README.md":
-            title = md_file.stem.replace("-", " ").replace("_", " ").title()
+            title = infer_markdown_label(md_file, humanize_segment(md_file.stem))
             files.append((md_file, title))
 
     # Recursively get subfolders
@@ -429,9 +518,7 @@ def collect_folder_files(folder_path: Path) -> list[tuple[Path, str]]:
             for sf, st in subfiles:
                 rel_path = sf.relative_to(folder_path)
                 if len(rel_path.parts) > 1:
-                    prefix = (
-                        rel_path.parts[0].replace("-", " ").replace("_", " ").title()
-                    )
+                    prefix = humanize_segment(rel_path.parts[0])
                     files.append((sf, f"{prefix}: {st}"))
                 else:
                     files.append((sf, st))
@@ -457,6 +544,7 @@ class ChapterCollector:
             item_path = self.root_path / item
 
             if item_path.is_file() and item_path.suffix == ".md":
+                resolved_title = infer_markdown_label(item_path, display_name)
                 chapter_num += 1
                 chapter_filename = f"chap_{chapter_num:02d}.xhtml"
                 self.state.path_to_chapter[item] = chapter_filename
@@ -464,15 +552,21 @@ class ChapterCollector:
                 chapters.append(
                     ChapterInfo(
                         file_path=item_path,
-                        display_name=display_name,
-                        file_title=display_name,
+                        display_name=resolved_title,
+                        file_title=resolved_title,
                         chapter_filename=chapter_filename,
                     )
                 )
 
             elif item_path.is_dir():
+                folder_readme = item_path / "README.md"
+                resolved_display_name = (
+                    infer_markdown_label(folder_readme, display_name)
+                    if folder_readme.exists()
+                    else display_name
+                )
                 folder_chapters = self._collect_folder(
-                    item_path, item, display_name, chapter_num
+                    item_path, item, resolved_display_name, chapter_num
                 )
                 if folder_chapters:
                     chapter_num += 1
@@ -505,7 +599,7 @@ class ChapterCollector:
                 ChapterInfo(
                     file_path=file_path,
                     display_name=display_name if i == 0 else file_title,
-                    file_title=file_title,
+                    file_title="概览" if i == 0 else file_title,
                     chapter_filename=chapter_filename,
                     is_folder_overview=(i == 0),
                     folder_name=display_name,
@@ -587,6 +681,21 @@ def create_cover_image(
 ) -> bytes:
     """Create a cover image with proper error handling."""
     try:
+        cover_image_path = config.cover_image_path or (
+            config.root_path / "assets/cover/epub-cover-official.png"
+        )
+        if cover_image_path.exists():
+            with Image.open(cover_image_path) as cover_image:
+                fitted = ImageOps.fit(
+                    cover_image.convert("RGB"),
+                    (config.cover_width, config.cover_height),
+                    method=Image.Resampling.LANCZOS,
+                )
+                buffer = BytesIO()
+                fitted.save(buffer, format="PNG", optimize=True)
+                logger.info(f"Using prebuilt cover image: {cover_image_path}")
+                return buffer.getvalue()
+
         cover = Image.new(
             "RGB", (config.cover_width, config.cover_height), config.cover_bg_color
         )
@@ -644,12 +753,42 @@ def create_chapter_html(
     display_name: str, file_title: str, html_content: str, is_overview: bool = False
 ) -> str:
     """Create chapter HTML with proper escaping."""
+    heading_map = {
+        "Table of Contents": "目录",
+        "Contributing": "参与贡献",
+        "License": "许可证",
+        "Troubleshooting": "故障排查",
+        "Best Practices": "最佳实践",
+        "Features": "功能特性",
+        "Installation": "安装方式",
+        "What's Included": "包含内容",
+        "Requirements": "使用前提",
+        "Usage": "使用方式",
+        "Examples": "示例",
+        "Overview": "概览",
+        "Quick Start": "快速开始",
+        "Output Requirements": "输出要求",
+        "Summary": "总结",
+    }
+
+    soup = BeautifulSoup(html_content, "html.parser")
+    first_h1 = soup.find("h1")
+    if first_h1 is not None:
+        first_h1.decompose()
+
+    for heading in soup.find_all(["h2", "h3", "h4"]):
+        text = heading.get_text(" ", strip=True)
+        if text in heading_map:
+            heading.clear()
+            heading.append(heading_map[text])
+
+    html_content = str(soup)
     safe_display = html.escape(display_name)
     safe_title = html.escape(file_title)
 
     if is_overview:
         return f"""<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
     <meta charset="utf-8"/>
     <title>{safe_display}</title>
@@ -661,7 +800,7 @@ def create_chapter_html(
 </html>"""
     else:
         return f"""<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
     <meta charset="utf-8"/>
     <title>{safe_title}</title>
@@ -692,6 +831,56 @@ def handle_svg_image(src: str, alt: str, logger: logging.Logger) -> str:
     """
     logger.debug(f"Replaced SVG image: {src}")
     return placeholder
+
+
+def embed_local_raster_images(
+    soup: BeautifulSoup,
+    current_file: Path,
+    root_path: Path,
+    book: epub.EpubBook,
+    state: BuildState,
+    logger: logging.Logger,
+) -> None:
+    """Embed local PNG/JPG images into the EPUB and rewrite their src."""
+    for img in soup.find_all("img"):
+        src = img.get("src", "")
+        if not src or src.startswith(("http://", "https://", "data:")):
+            continue
+        if src.endswith(".svg"):
+            continue
+
+        source_path = (current_file.parent / src).resolve()
+        try:
+            rel_path = source_path.relative_to(root_path)
+        except ValueError:
+            continue
+        if not source_path.exists():
+            logger.warning(f"Local image not found: {source_path}")
+            continue
+
+        asset_key = str(rel_path)
+        asset_name = re.sub(r"[^A-Za-z0-9_.-]+", "_", asset_key)
+        epub_path = f"images/{asset_name}"
+        if asset_key not in state.embedded_assets:
+            media_type = {
+                ".png": "image/png",
+                ".jpg": "image/jpeg",
+                ".jpeg": "image/jpeg",
+                ".webp": "image/webp",
+            }.get(source_path.suffix.lower())
+            if media_type is None:
+                continue
+            item = epub.EpubItem(
+                uid=asset_name.replace(".", "_"),
+                file_name=epub_path,
+                media_type=media_type,
+                content=source_path.read_bytes(),
+            )
+            book.add_item(item)
+            state.embedded_assets.add(asset_key)
+            logger.debug(f"Embedded local image: {source_path}")
+
+        img["src"] = epub_path
 
 
 # =============================================================================
@@ -793,6 +982,9 @@ def md_to_html(
     - Standard markdown features
     """
     # Process mermaid blocks first (before markdown conversion)
+    if current_file == root_path / "README.md":
+        md_content = prepare_root_readme_for_epub(md_content)
+
     md_content = process_mermaid_blocks(md_content, book, state, logger)
 
     # Convert markdown to HTML
@@ -814,6 +1006,8 @@ def md_to_html(
             alt = img.get("alt", "Image")
             placeholder = handle_svg_image(src, alt, logger)
             img.replace_with(BeautifulSoup(placeholder, "html.parser"))
+
+    embed_local_raster_images(soup, current_file, root_path, book, state, logger)
 
     html_content = str(soup)
 
@@ -924,7 +1118,7 @@ async def build_epub_async(
         chapter = epub.EpubHtml(
             title=chapter_info.file_title,
             file_name=chapter_info.chapter_filename,
-            lang="en",
+            lang=config.language,
         )
 
         chapter.content = create_chapter_html(

@@ -1,4 +1,4 @@
-# Refactoring Catalog
+# Refactoring Catalog / 重构方法清单
 
 这个文件汇总了一些常见重构手法及适用场景。
 

@@ -5,7 +5,7 @@ tools: Read, Edit, Bash, Grep, Glob
 model: inherit
 ---
 
-# Debugger Agent
+# Debugger / 调试代理
 
 你是一名专注于根因分析的调试专家。
 

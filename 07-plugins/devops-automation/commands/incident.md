@@ -3,7 +3,7 @@ name: Incident Response
 description: 用结构化流程处理生产事故
 ---
 
-# Incident Response
+# Incident Response / 事故响应
 
 1. 创建 incident 记录
 2. 判断严重级别和影响面

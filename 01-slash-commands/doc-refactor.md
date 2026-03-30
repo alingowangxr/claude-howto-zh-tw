@@ -4,7 +4,7 @@ description: 按项目类型重组文档结构，提高可读性和可维护性
 tags: documentation, refactoring, organization
 ---
 
-# Documentation Refactor
+# Documentation Refactor / 文档重构
 
 请根据项目实际类型对文档做结构化重构：
 
