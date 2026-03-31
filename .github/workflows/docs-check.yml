@@ -71,7 +71,6 @@ jobs:
             **/*.json
             **/*.yml
             **/*.yaml
-          incremental: 'no'
           config: '.cspell.json'
 
   frontmatter:
