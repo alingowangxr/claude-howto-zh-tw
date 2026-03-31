@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import subprocess
+import subprocess  # nosec B404 - used only for local shell syntax validation
 import sys
 from pathlib import Path
 
@@ -156,6 +156,7 @@ def validate_shell_scripts(root: Path) -> list[str]:
     for path in root.rglob("*.sh"):
         if ".venv" in path.parts or "node_modules" in path.parts:
             continue
+        # nosec B603,B607: validating repo-local shell files with `bash -n`
         result = subprocess.run(
             ["bash", "-n", str(path)],
             capture_output=True,
