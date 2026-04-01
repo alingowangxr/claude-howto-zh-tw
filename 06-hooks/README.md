@@ -250,6 +250,36 @@ hooks 通常通过 `stdin` 接收 JSON 输入。
 
 ---
 
+## 关于 `auto-adapt-mode` 的更新
+
+如果你之前看过旧资料，可能见过一种思路：
+
+- 在 `PostToolUse` 里记录你批准过的命令
+- 自动把这些批准“泛化”进本地权限配置
+
+上游最近已经把这条路线下掉了，不再推荐继续使用旧的：
+
+- `06-hooks/auto-adapt-mode.py`
+
+新的建议方式是：
+
+- 使用一次性脚本 `09-advanced-features/setup-auto-mode-permissions.py`
+- 直接把一组更保守、更可控的权限规则写进 `~/.claude/settings.json`
+- 再通过命令行参数按需放开 edits、tests、git writes、package installs、GitHub write 等能力
+
+这样做的好处是：
+
+- 不再依赖“边用边学你的批准”
+- 配置更可预测
+- 更适合团队分享和审阅
+- 对中国用户来说，也更容易解释“当前到底开了哪些权限”
+
+如果你在意 Auto Mode 但又没有 Team plan，优先看：
+
+- [09-advanced-features/README.md](../09-advanced-features/README.md)
+
+---
+
 ## hooks 配置里哪些绝对不能翻
 
 - `hooks`

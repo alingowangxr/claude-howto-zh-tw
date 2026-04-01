@@ -18,8 +18,20 @@
 
 ---
 
+## 最近同步
+
+- **最近同步日期**：2026-04-01
+- **同步上游基线**：`d41b335` -> `0ca8c37`
+- **本次同步内容**：
+  - 上游不再推荐通过 `06-hooks/auto-adapt-mode.py` 学习用户批准记录，改为一次性权限种子脚本 `09-advanced-features/setup-auto-mode-permissions.py`
+  - `Advanced Features` 中的 auto-mode 权限基线收窄为更保守的默认集合，并支持按需开启 edits、tests、git writes、package installs、GitHub write 等能力
+  - 上游 `README` 增加了 GitHub Trending 徽章；中文版仓库**不直接照搬该徽章**，避免把上游热度状态误写成当前中文 fork 的实际状态
+
+---
+
 ## Table of Contents
 
+- [最近同步](#最近同步)
 - [这是什么项目](#这是什么项目)
 - [本项目做了哪些调整](#本项目做了哪些调整)
 - [哪些内容为了兼容性不会翻译](#哪些内容为了兼容性不会翻译)

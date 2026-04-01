@@ -2,6 +2,24 @@
 
 > 本文件保留上游版本信息的时间顺序，但用中文补充阅读说明，方便中文用户快速判断“这个仓库最近同步了什么”。
 
+## 中文版同步 — 2026-04-01
+
+### Upstream Sync
+
+- 同步上游范围：`d41b335` → `0ca8c37`
+- 核心变化：
+  - hooks 不再推荐旧的 `auto-adapt-mode` 动态学习方案
+  - 新增一次性权限种子脚本 `09-advanced-features/setup-auto-mode-permissions.py`
+  - auto-mode 权限基线改为更保守的默认集合，并支持按需开启 edits、tests、git writes、packages、GitHub writes
+  - 上游 `README` 新增 Trending 徽章
+
+### Chinese Fork Handling
+
+- 删除本仓库中的旧 `06-hooks/auto-adapt-mode.py`
+- 在 `06-hooks/README.md` 和 `09-advanced-features/README.md` 中补上新的中文说明
+- 在 `README.md` 中加入最近同步日期与更新内容说明
+- 未直接照搬上游 Trending 徽章，以避免误导为当前中文 fork 的真实热度状态
+
 ## v2.2.0 — 2026-03-26
 
 ### Documentation

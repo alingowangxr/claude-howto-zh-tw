@@ -4,7 +4,7 @@
 
 - 上游仓库：[`luongnv89/claude-howto`](https://github.com/luongnv89/claude-howto)
 - 上游分支：`main`
-- 本地化基线 commit：`d41b335cbc40832d83656184c5a67ca4952bad4f`
+- 本地化基线 commit：`0ca8c37c81918458e063739425c4740ca92c2db2`
 - 上游许可证：[MIT License](LICENSE)
 
 ## 本仓库性质
@@ -58,6 +58,24 @@ uv run python scripts/validate_localization.py
    - 上游变更点
    - 本仓库采取了什么处理
    - 哪些内容暂时未同步
+
+## 最近一次同步记录
+
+### Upstream Sync — 2026-04-01
+
+- Upstream range: `d41b335` → `0ca8c37`
+- Affected files:
+  - `06-hooks/README.md`
+  - `06-hooks/auto-adapt-mode.py`
+  - `09-advanced-features/README.md`
+  - `09-advanced-features/setup-auto-mode-permissions.py`
+  - `README.md`
+- Chinese fork actions:
+  - 删除旧的 `auto-adapt-mode` hook 文件，不再继续维护“动态记忆批准”方案
+  - 新增 `09-advanced-features/setup-auto-mode-permissions.py`，同步上游的一次性权限种子脚本
+  - 在中文 `Advanced Features` 和 `Hooks` 文档中补上新的使用方式、适用场景和安全边界
+  - 在项目介绍中写明最近同步日期与本次上游更新内容
+  - 上游新增的 Trending 徽章未直接照搬，因为它描述的是上游仓库状态，而不是当前中文 fork 的状态
 
 ## 建议记录模板
 

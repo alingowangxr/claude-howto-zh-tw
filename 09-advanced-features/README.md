@@ -139,6 +139,81 @@ Auto Mode 属于更偏自动化、也更需要谨慎的能力。
 
 ---
 
+## 没有 Team plan 时的替代方案：一次性权限种子脚本
+
+如果你没有 Team plan，或者你不想用“后台分类器 + 自动判定”这套模式，上游最近新增了一种更务实的替代方案：
+
+- 直接用一次性脚本把一组 **更保守的安全权限基线** 写进 `~/.claude/settings.json`
+
+脚本位置：
+
+```text
+09-advanced-features/setup-auto-mode-permissions.py
+```
+
+### 典型用法
+
+```bash
+# 先预览会加什么，不落盘
+python3 09-advanced-features/setup-auto-mode-permissions.py --dry-run
+
+# 写入保守基线
+python3 09-advanced-features/setup-auto-mode-permissions.py
+
+# 按需再放开能力
+python3 09-advanced-features/setup-auto-mode-permissions.py --include-edits --include-tests
+python3 09-advanced-features/setup-auto-mode-permissions.py --include-git-write --include-packages
+python3 09-advanced-features/setup-auto-mode-permissions.py --include-gh-read --include-gh-write
+```
+
+### 这组权限默认包含什么
+
+| 类别 | 示例 |
+|------|------|
+| Core read-only tools | `Read(*)`、`Glob(*)`、`Grep(*)`、`Agent(*)`、`WebSearch(*)`、`WebFetch(*)` |
+| Local inspection | `Bash(git status:*)`、`Bash(git log:*)`、`Bash(git diff:*)`、`Bash(cat:*)` |
+| Optional edits | `Edit(*)`、`Write(*)`、`NotebookEdit(*)` |
+| Optional test/build | `Bash(pytest:*)`、`Bash(cargo test:*)`、`Bash(make:*)` |
+| Optional git writes | `Bash(git add:*)`、`Bash(git commit:*)`、`Bash(git stash:*)` |
+| Optional packages | `Bash(npm install:*)`、`Bash(pip install:*)` |
+| Optional GitHub CLI | `Bash(gh pr view:*)`、`Bash(gh pr create:*)` |
+
+### 它和旧的 `auto-adapt-mode` 有什么不同
+
+旧思路：
+
+- 通过 hook 动态学习你批准过什么
+
+现在的新思路：
+
+- 一次性写入一组明确的规则
+- 再通过命令行参数按需增加范围
+
+这对中文用户尤其有帮助，因为它更容易解释清楚：
+
+- 现在到底开了哪些权限
+- 哪些是默认安全基线
+- 哪些是你主动额外放开的
+
+### 明确不会自动加进去的危险操作
+
+脚本明确不会帮你加入这些类型：
+
+- `rm -rf`
+- `sudo`
+- force push
+- `git reset --hard`
+- `DROP TABLE`
+- `kubectl delete`
+- `terraform destroy`
+- `npm publish`
+- `curl | bash`
+- 生产环境 deploy
+
+如果你想要“更自动化”，请先明确你是**真的需要**，而不是只是觉得方便。
+
+---
+
 ## permission modes
 
 permission modes 决定 Claude 在本地能做什么，以及什么时候会请求你确认。
