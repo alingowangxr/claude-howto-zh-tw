@@ -5,118 +5,118 @@
 
 [![Source Project](https://img.shields.io/badge/source-luongnv89%2Fclaude--howto-24292f)](https://github.com/luongnv89/claude-howto)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Localization](https://img.shields.io/badge/localization-zh--CN-brightgreen)](LOCALIZATION-STYLE.md)
+[![Localization](https://img.shields.io/badge/localization-zh--TW-brightgreen)](LOCALIZATION-STYLE.md)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-2.1+-purple)](https://code.claude.com)
 
 # Claude Code 中文全面上手指南
 
-从会输入 `claude`，到真正会组合使用 slash commands、memory、skills、hooks、MCP、subagents 和 plugins。
+從會輸入 `claude`，到真正會組合使用 slash commands、memory、skills、hooks、MCP、subagents 和 plugins。
 
-这是一个基于上游项目 [`luongnv89/claude-howto`](https://github.com/luongnv89/claude-howto) 的 **非官方中文本土化 fork**。它不是生硬逐句翻译，而是面向中国小白用户重写表达方式、补齐学习路径、保留所有关键可执行标识，并加入翻译后兼容性校验。
+這是一個基於上游專案 [`luongnv89/claude-howto`](https://github.com/luongnv89/claude-howto) 的 **非官方繁體中文化 fork**。它不是生硬逐句翻譯，而是面向臺灣使用者重寫表達方式、補齊學習路徑、保留所有關鍵可執行標識，並加入翻譯後相容性校驗。
 
-**[15 分钟快速开始](#-15-分钟快速开始)** | **[先判断你适合从哪开始](#-不知道从哪里开始)** | **[浏览功能总表](CATALOG.md)** | **[查看来源与同步说明](UPSTREAM.md)**
+**[15 分鐘快速開始](#-15-分鐘快速開始)** | **[先判斷你適合從哪開始](#-不知道從哪裡開始)** | **[瀏覽功能總表](CATALOG.md)** | **[Windows 使用指南](WINDOWS-GUIDE.md)** | **[排錯指南](TROUBLESHOOTING.md)** | **[檢視來源與同步說明](UPSTREAM.md)**
 
 ---
 
 ## 最近同步
 
 - **最近同步日期**：2026-04-01
-- **同步上游基线**：`d41b335` -> `0ca8c37`
-- **本次同步内容**：
-  - 上游不再推荐通过 `06-hooks/auto-adapt-mode.py` 学习用户批准记录，改为一次性权限种子脚本 `09-advanced-features/setup-auto-mode-permissions.py`
-  - `Advanced Features` 中的 auto-mode 权限基线收窄为更保守的默认集合，并支持按需开启 edits、tests、git writes、package installs、GitHub write 等能力
-  - 上游 `README` 增加了 GitHub Trending 徽章；中文版仓库**不直接照搬该徽章**，避免把上游热度状态误写成当前中文 fork 的实际状态
+- **同步上游基線**：`d41b335` -> `0ca8c37`
+- **本次同步內容**：
+  - 上游不再推薦透過 `06-hooks/auto-adapt-mode.py` 學習使用者核准記錄，改為一次性許可權種子腳本 `09-advanced-features/setup-auto-mode-permissions.py`
+  - `Advanced Features` 中的 auto-mode 許可權基線收窄為更保守的預設集合，並支援按需開啟 edits、tests、git writes、package installs、GitHub write 等能力
+  - 上游 `README` 增加了 GitHub Trending 徽章；中文版倉庫**不直接照搬該徽章**，避免把上游熱度狀態誤寫成當前中文 fork 的實際狀態
 
 ---
 
 ## Table of Contents
 
 - [最近同步](#最近同步)
-- [这是什么项目](#这是什么项目)
-- [本项目做了哪些调整](#本项目做了哪些调整)
-- [哪些内容为了兼容性不会翻译](#哪些内容为了兼容性不会翻译)
-- [为什么这份指南更适合中国小白](#为什么这份指南更适合中国小白)
-- [怎么使用这份指南](#怎么使用这份指南)
-- [不知道从哪里开始](#-不知道从哪里开始)
-- [15 分钟快速开始](#-15-分钟快速开始)
-- [你能用它搭什么](#你能用它搭什么)
-- [常见问题](#常见问题)
+- [這是什麼專案](#這是什麼專案)
+- [本專案做了哪些調整](#本專案做了哪些調整)
+- [哪些內容為了相容性不會翻譯](#哪些內容為了相容性不會翻譯)
+- [為什麼這份指南更適合初學者](#為什麼這份指南更適合初學者)
+- [怎麼使用這份指南](#怎麼使用這份指南)
+- [不知道從哪裡開始](#-不知道從哪裡開始)
+- [15 分鐘快速開始](#-15-分鐘快速開始)
+- [你能用它搭什麼](#你能用它搭什麼)
+- [常見問題](#常見問題)
 - [Contributing](#contributing)
 - [License](#license)
 
 ---
 
-## 这是什么项目
+## 這是什麼專案
 
-如果你已经装好了 Claude Code，但只会简单对话，很容易卡在这几个地方：
+如果你已經裝好了 Claude Code，但只會簡單對話，很容易卡在這幾個地方：
 
-- 官方文档告诉你“有什么功能”，却不会告诉你“这些功能怎么组合起来真正在项目里省时间”。
-- 你知道 `CLAUDE.md`、hooks、MCP、skills、subagents 这些词，但不知道先学哪个、后学哪个。
-- 你能看懂一些简单例子，但还不会把它们变成自己的 code review、文档生成、自动化流程。
+- 官方檔案告訴你“有什麼功能”，卻不會告訴你“這些功能怎麼組合起來真正在專案裡省時間”。
+- 你知道 `CLAUDE.md`、hooks、MCP、skills、subagents 這些詞，但不知道先學哪個、後學哪個。
+- 你能看懂一些簡單範例，但還不會把它們變成自己的 code review、檔案生成、自動化流程。
 
-这个仓库的目标，就是把这些碎片能力整理成一条可落地的学习路径，让你知道：
+這個倉庫的目標，就是把這些碎片能力整理成一條可落地的學習路徑，讓你知道：
 
-- 先学什么最有效
-- 每个功能什么时候用
-- 哪些示例可以直接复制
-- 哪些看起来像普通文本、其实不能乱翻
+- 先學什麼最有效
+- 每個功能什麼時候用
+- 哪些範例可以直接複製
+- 哪些看起來像普通文字、其實不能亂翻
 
 ---
 
-## 本项目做了哪些调整
+## 本專案做了哪些調整
 
-和上游英文项目相比，这个中文版做了这些本土化处理：
+和上游英文專案相比，這個中文版做了這些本土化處理：
 
-- 把首页、学习路线、速查卡、功能目录等核心入口文档改成中文主线表达。
-- 用中国小白更容易理解的方式重写“是什么 / 什么时候用 / 怎么装 / 怎么跑 / 常见坑”。
-- 保留所有会影响运行的关键标识，避免为了翻译把示例翻坏。
-- 补充中国用户常见障碍说明，比如 GitHub Token、`npm` / `npx` / `uv` / Python 环境、网络与代理、macOS / Windows / WSL 差异。
-- 增加来源声明、同步策略和本地化风格规范，方便后续持续跟进上游版本。
-- 增加本地化校验脚本，自动检查 frontmatter、JSON/YAML、shell 脚本、关键命令名和受保护标识是否仍然可用。
+- 把首頁、學習路線、速查卡、功能目錄等核心入口檔案改成中文主線表達。
+- 用初學者更容易理解的方式重寫“是什麼 / 什麼時候用 / 怎麼裝 / 怎麼跑 / 常見坑”。
+- 保留所有會影響執行的關鍵標識，避免為了翻譯把範例翻壞。
+- 補充新手使用者常見障礙說明，比如 GitHub Token、`npm` / `npx` / `uv` / Python 環境、網路與代理程式、macOS / Windows / WSL 差異。
+- 增加來源宣告、同步策略和在地化風格規範，方便後續持續跟進上游版本。
+- 增加在地化校驗腳本，自動檢查 frontmatter、JSON/YAML、shell 腳本、關鍵命令名和受保護標識是否仍然可用。
 
-详细规则见：
+詳細規則見：
 
 - [UPSTREAM.md](UPSTREAM.md)
 - [LOCALIZATION-STYLE.md](LOCALIZATION-STYLE.md)
 
 ---
 
-## 哪些内容为了兼容性不会翻译
+## 哪些內容為了相容性不會翻譯
 
-为了确保示例仍然能直接复制运行，下列内容默认 **保留英文，不做中文化改名**：
+為了確保範例仍然能直接複製執行，下列內容預設 **保留英文，不做中文化改名**：
 
-- 目录名、文件名
-- slash command 名称
-- skill / subagent / plugin 名称
+- 目錄名、檔名
+- slash command 名稱
+- skill / subagent / plugin 名稱
 - YAML frontmatter key
 - JSON / YAML key
-- CLI flags、环境变量名、路径占位符、MCP server 名
-- 代码块里的可执行命令、配置片段、协议字段
+- CLI flags、環境變數名、路徑佔位符、MCP server 名
+- 程式碼塊裡的可執行命令、設定片段、協議欄位
 
-举例来说，`skills`、`CLI`、`hooks`、`MCP`、`subagents` 这些术语在正文里通常会保留英文，并在首次出现时补充中文解释；但不会粗暴改成一个中文词后再让读者回头猜原始命令是什么。
-
----
-
-## 为什么这份指南更适合中国小白
-
-这个中文版本不是“翻译腔”文档，而是按学习体验重新组织表达：
-
-- 先讲清楚“这是什么”和“什么时候用”，再给你命令和配置。
-- 尽量把容易混淆的概念放在一起对比，比如 slash commands、skills、memory、hooks、plugins 的职责边界。
-- 对中国开发者常见的安装、访问和权限问题，直接给出前置提醒，不让你跑到一半才踩坑。
-- 对高风险示例明确提醒哪些行不能翻、哪些字段不能改。
+舉例來說，`skills`、`CLI`、`hooks`、`MCP`、`subagents` 這些術語在正文裡通常會保留英文，並在首次出現時補充中文解釋；但不會粗暴改成一個中文詞後再讓讀者回頭猜原始命令是什麼。
 
 ---
 
-## 怎么使用这份指南
+## 為什麼這份指南更適合初學者
 
-### 1. 先找自己的起点
+這個中文版本不是“翻譯腔”檔案，而是按學習體驗重新組織表達：
 
-直接看 [LEARNING-ROADMAP.md](LEARNING-ROADMAP.md)，先做自测，再按 beginner / intermediate / advanced 路线学。
+- 先講清楚“這是什麼”和“什麼時候用”，再給你命令和設定。
+- 儘量把容易混淆的概念放在一起對比，比如 slash commands、skills、memory、hooks、plugins 的職責邊界。
+- 對新手開發者常見的安裝、訪問和許可權問題，直接給出前置提醒，不讓你跑到一半才踩坑。
+- 對高風險範例明確提醒哪些行不能翻、哪些欄位不能改。
 
-### 2. 再按模块逐步上手
+---
 
-仓库里的 10 个模块按推荐顺序排列：
+## 怎麼使用這份指南
+
+### 1. 先找自己的起點
+
+直接看 [LEARNING-ROADMAP.md](LEARNING-ROADMAP.md)，先做自測，再按 beginner / intermediate / advanced 路線學。
+
+### 2. 再按模組逐步上手
+
+倉庫裡的 10 個模組按推薦順序排列：
 
 1. [Slash Commands](01-slash-commands/)
 2. [Memory](02-memory/)
@@ -129,9 +129,9 @@
 9. [Advanced Features](09-advanced-features/)
 10. [Plugins](07-plugins/)
 
-### 3. 边学边复制模板
+### 3. 邊學邊複製範本
 
-这个仓库不是纯阅读材料。很多文件都可以直接复制到你的项目里，例如：
+這個倉庫不是純閱讀材料。很多檔案都可以直接複製到你的專案裡，例如：
 
 - `01-slash-commands/*.md`
 - `02-memory/project-CLAUDE.md`
@@ -141,61 +141,61 @@
 - `06-hooks/*.sh`
 - `07-plugins/*`
 
-### 4. 每改一处示例都先确认兼容性
+### 4. 每改一處範例都先確認相容性
 
-如果你继续 fork 并深度本地化，建议每次改完都跑：
+如果你繼續 fork 並深度在地化，建議每次改完都跑：
 
 ```bash
 uv run python scripts/validate_localization.py
 ```
 
-它会帮你检查：
+它會幫你檢查：
 
-- Markdown 相对链接
+- Markdown 相對連結
 - YAML frontmatter
 - JSON / YAML 解析
-- shell 脚本语法
-- 关键可执行标识是否被误改
+- shell 腳本語法
+- 關鍵可執行標識是否被誤改
 
 ---
 
-## 🌱 不知道从哪里开始
+## 🌱 不知道從哪裡開始
 
-如果你还不确定自己算什么水平，可以直接用下面这套简版判断：
+如果你還不確定自己算什麼水平，可以直接用下面這套簡版判斷：
 
-| 你目前的情况 | 建议起点 | 预计时间 |
+| 你目前的情況 | 建議起點 | 預計時間 |
 |--------------|----------|----------|
-| 只会打开 Claude Code 聊天 | [01-slash-commands](01-slash-commands/) | 约 2.5 小时 |
-| 已经用过 `CLAUDE.md` 和一些命令 | [03-skills](03-skills/) | 约 3.5 小时 |
-| 已经开始碰 hooks、MCP、subagents | [09-advanced-features](09-advanced-features/) | 约 5 小时 |
+| 只會開啟 Claude Code 聊天 | [01-slash-commands](01-slash-commands/) | 約 2.5 小時 |
+| 已經用過 `CLAUDE.md` 和一些命令 | [03-skills](03-skills/) | 約 3.5 小時 |
+| 已經開始碰 hooks、MCP、subagents | [09-advanced-features](09-advanced-features/) | 約 5 小時 |
 
-完整路线见 [LEARNING-ROADMAP.md](LEARNING-ROADMAP.md)。
+完整路線見 [LEARNING-ROADMAP.md](LEARNING-ROADMAP.md)。
 
 ---
 
-## 🚀 15 分钟快速开始
+## 🚀 15 分鐘快速開始
 
-如果你只是想先跑起来，不想马上看完整教程，可以先做这一套：
+如果你只是想先跑起來，不想馬上看完整教學，可以先做這一套：
 
 ```bash
-# 1. 准备项目目录
+# 1. 準備專案目錄
 mkdir -p /path/to/your-project/.claude/commands
 
-# 2. 复制第一个 slash command
+# 2. 複製第一個 slash command
 cp 01-slash-commands/optimize.md /path/to/your-project/.claude/commands/
 
-# 3. 在 Claude Code 里试用
+# 3. 在 Claude Code 裡試用
 # /optimize
 
-# 4. 加上项目级 memory
+# 4. 加上專案級 memory
 cp 02-memory/project-CLAUDE.md /path/to/your-project/CLAUDE.md
 
-# 5. 安装一个 skill
+# 5. 安裝一個 skill
 mkdir -p ~/.claude/skills
 cp -r 03-skills/code-review ~/.claude/skills/
 ```
 
-如果你想在 1 小时内完成最小可用配置，可以继续：
+如果你想在 1 小時內完成最小可用設定，可以繼續：
 
 ```bash
 # Slash commands
@@ -207,89 +207,90 @@ cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 # A reusable skill
 cp -r 03-skills/code-review ~/.claude/skills/
 
-# 周末目标：继续加 hooks、MCP、subagents、plugins
+# 週末目標：繼續加 hooks、MCP、subagents、plugins
 ```
 
 ---
 
-## 你能用它搭什么
+## 你能用它搭什麼
 
-| 场景 | 你会组合哪些能力 |
+| 場景 | 你會組合哪些能力 |
 |------|------------------|
-| 自动化代码审查 | Slash Commands + Subagents + Memory + MCP |
-| 团队 onboarding | Memory + Slash Commands + Plugins |
-| 文档自动生成 | Skills + Subagents + Plugins |
-| CI/CD 自动化 | CLI + Hooks + Background Tasks |
-| 安全审计 | Skills + Hooks + Subagents |
+| 自動化程式碼審查 | Slash Commands + Subagents + Memory + MCP |
+| 團隊 onboarding | Memory + Slash Commands + Plugins |
+| 檔案自動生成 | Skills + Subagents + Plugins |
+| CI/CD 自動化 | CLI + Hooks + Background Tasks |
+| 安全審計 | Skills + Hooks + Subagents |
 | DevOps 流程 | Plugins + MCP + Hooks |
-| 大型重构 | Checkpoints + Planning Mode + Hooks |
+| 大型重構 | Checkpoints + Planning Mode + Hooks |
 
 ---
 
-## 常见问题
+## 常見問題
 
-**这是官方项目吗？**  
-不是。这是基于上游社区项目做的中文本土化 fork，来源与同步策略见 [UPSTREAM.md](UPSTREAM.md)。
+**這是官方專案嗎？**  
+不是。這是基於上游社群專案做的繁體中文化 fork，來源與同步策略見 [UPSTREAM.md](UPSTREAM.md)。
 
-**我能直接复制里面的命令和配置吗？**  
-大多数可以，但前提是你不要改坏关键标识。像 frontmatter key、JSON key、CLI flags、环境变量名这些不能为了中文化而改掉。
+**我能直接複製裡面的命令和設定嗎？**  
+大多數可以，但前提是你不要改壞關鍵標識。像 frontmatter key、JSON key、CLI flags、環境變數名這些不能為了中文化而改掉。
 
-**为什么有些术语不翻译？**  
-因为很多术语一旦翻译，会让你在真实使用 Claude Code、搜索官方文档、复制命令时更容易混淆。这个项目遵循“术语保真，解释中文化”的原则。
+**為什麼有些術語不翻譯？**  
+因為很多術語一旦翻譯，會讓你在真實使用 Claude Code、搜尋官方檔案、複製命令時更容易混淆。這個專案遵循“術語保真，解釋中文化”的原則。
 
-**中国用户最容易卡在哪？**  
-常见是：GitHub 访问、Token 权限、`npm` / `npx` / `uv` / Python 环境、Windows 和 WSL 差异、以及把示例里可执行字段误翻译。
+**新手使用者最容易卡在哪？**  
+常見是：GitHub 訪問、Token 許可權、`npm` / `npx` / `uv` / Python 環境、Windows 和 WSL 差異、以及把範例裡可執行欄位誤翻譯。
 
-**能离线看吗？**  
-可以。运行：
+**能離線看嗎？**  
+可以。執行：
 
 ```bash
 uv run scripts/build_epub.py
 ```
 
-会生成 EPUB 电子书。脚本说明见 [scripts/README.md](scripts/README.md)。
+會生成 EPUB 電子書。腳本說明見 [scripts/README.md](scripts/README.md)。
 
-**之后怎么跟上游同步？**  
-请先看 [UPSTREAM.md](UPSTREAM.md)。本仓库默认按“持续同步上游、中文侧增量跟进”的方式维护。
+**之後怎麼跟上游同步？**  
+請先看 [UPSTREAM.md](UPSTREAM.md)。本倉庫預設按“持續同步上游、中文側增量跟進”的方式維護。
 
 ---
 
 <details>
-<summary>快速导航：所有核心能力</summary>
+<summary>快速導航：所有核心能力</summary>
 
-| 能力 | 说明 | 入口 |
+| 能力 | 說明 | 入口 |
 |------|------|------|
-| 功能总表 | 一眼看全所有功能、安装方式、适用场景 | [CATALOG.md](CATALOG.md) |
-| 学习路线 | 从新手到进阶的推荐学习顺序 | [LEARNING-ROADMAP.md](LEARNING-ROADMAP.md) |
-| Quick Reference | 安装命令、路径、常用场景速查 | [QUICK_REFERENCE.md](QUICK_REFERENCE.md) |
-| Slash Commands | 用户主动触发的快捷操作 | [01-slash-commands/](01-slash-commands/) |
-| Memory | 持久上下文与规则 | [02-memory/](02-memory/) |
-| Skills | 自动触发的复用能力 | [03-skills/](03-skills/) |
-| Subagents | 分工明确的 AI 助手 | [04-subagents/](04-subagents/) |
-| MCP | 外部工具与实时数据接入 | [05-mcp/](05-mcp/) |
-| Hooks | 事件驱动自动化 | [06-hooks/](06-hooks/) |
-| Plugins | 多能力打包分发 | [07-plugins/](07-plugins/) |
-| Checkpoints | 安全试错与回退 | [08-checkpoints/](08-checkpoints/) |
-| Advanced Features | plan、auto mode、background tasks 等高级能力 | [09-advanced-features/](09-advanced-features/) |
-| CLI | `claude` / `claude -p` / session / automation 参考 | [10-cli/](10-cli/) |
+| 功能總表 | 一眼看全所有功能、安裝方式、適用場景 | [CATALOG.md](CATALOG.md) |
+| 學習路線 | 從新手到進階的推薦學習順序 | [LEARNING-ROADMAP.md](LEARNING-ROADMAP.md) |
+| Quick Reference | 安裝命令、路徑、常用場景速查 | [QUICK_REFERENCE.md](QUICK_REFERENCE.md) |
+| Slash Commands | 使用者主動觸發的快捷操作 | [01-slash-commands/](01-slash-commands/) |
+| Memory | 持久上下文與規則 | [02-memory/](02-memory/) |
+| Skills | 自動觸發的複用能力 | [03-skills/](03-skills/) |
+| Subagents | 分工明確的 AI 助手 | [04-subagents/](04-subagents/) |
+| MCP | 外部工具與實時資料接入 | [05-mcp/](05-mcp/) |
+| Hooks | 事件驅動自動化 | [06-hooks/](06-hooks/) |
+| Plugins | 多能力打包分發 | [07-plugins/](07-plugins/) |
+| Checkpoints | 安全試錯與回退 | [08-checkpoints/](08-checkpoints/) |
+| Advanced Features | plan、auto mode、background tasks 等高階能力 | [09-advanced-features/](09-advanced-features/) |
+| CLI | `claude` / `claude -p` / session / automation 參考 | [10-cli/](10-cli/) |
+| 互動學習工具 | self-assessment 自測 + lesson-quiz 模組測驗 | [CATALOG.md#互動學習工具](CATALOG.md#互動學習工具) |
 
 </details>
 
 <details>
-<summary>核心能力对照</summary>
+<summary>核心能力對照</summary>
 
-| 能力 | 触发方式 | 持久性 | 最适合什么 |
+| 能力 | 觸發方式 | 永續性 | 最適合什麼 |
 |------|----------|--------|------------|
-| Slash Commands | 手动输入 `/cmd` | 当前会话 | 高频快捷操作 |
-| Memory | 自动加载 | 跨会话 | 长期规则与偏好 |
-| Skills | 自动触发 | 文件系统级 | 可复用工作流 |
-| Subagents | 自动委派或显式调用 | 独立上下文 | 任务拆分 |
-| MCP | 自动查询 | 实时 | 外部系统接入 |
-| Hooks | 事件触发 | 配置级 | 自动检查和拦截 |
-| Plugins | 一次安装 | 组合能力 | 团队级打包方案 |
-| Checkpoints | 内建 | 会话级 | 安全试错 |
-| Planning Mode | 手动或自动进入 | 计划阶段 | 复杂实现 |
-| CLI | 终端命令 | 脚本 / 会话 | 自动化与 CI/CD |
+| Slash Commands | 手動輸入 `/cmd` | 當前會話 | 高頻快捷操作 |
+| Memory | 自動載入 | 跨會話 | 長期規則與偏好 |
+| Skills | 自動觸發 | 檔案系統級 | 可複用工作流 |
+| Subagents | 自動委派或顯式呼叫 | 獨立上下文 | 任務拆分 |
+| MCP | 自動查詢 | 實時 | 外部系統接入 |
+| Hooks | 事件觸發 | 設定級 | 自動檢查和攔截 |
+| Plugins | 一次安裝 | 組合能力 | 團隊級打包方案 |
+| Checkpoints | 內建 | 會話級 | 安全試錯 |
+| Planning Mode | 手動或自動進入 | 計劃階段 | 複雜實現 |
+| CLI | 終端命令 | 腳本 / 會話 | 自動化與 CI/CD |
 
 </details>
 
@@ -297,12 +298,12 @@ uv run scripts/build_epub.py
 
 ## Contributing
 
-欢迎继续把这个中文 fork 做得更适合中文用户，但请遵循两个底线：
+歡迎繼續把這個中文 fork 做得更適閤中文使用者，但請遵循兩個底線：
 
-- 先看 [LOCALIZATION-STYLE.md](LOCALIZATION-STYLE.md)，不要把可执行标识翻坏。
-- 先看 [UPSTREAM.md](UPSTREAM.md)，不要在没有记录映射关系的情况下随意偏离上游结构。
+- 先看 [LOCALIZATION-STYLE.md](LOCALIZATION-STYLE.md)，不要把可執行標識翻壞。
+- 先看 [UPSTREAM.md](UPSTREAM.md)，不要在沒有記錄對映關係的情況下隨意偏離上游結構。
 
-如果你要贡献翻译或重写内容，建议至少本地跑一次：
+如果你要貢獻翻譯或重寫內容，建議至少本機跑一次：
 
 ```bash
 uv run python scripts/validate_localization.py
@@ -312,6 +313,6 @@ uv run python scripts/validate_localization.py
 
 ## License
 
-本仓库沿用上游项目的 [MIT License](LICENSE)。
+本倉庫沿用上游專案的 [MIT License](LICENSE)。
 
-来源项目、上游 commit、同步策略和本地化边界见 [UPSTREAM.md](UPSTREAM.md)。
+來源專案、上游 commit、同步策略和在地化邊界見 [UPSTREAM.md](UPSTREAM.md)。

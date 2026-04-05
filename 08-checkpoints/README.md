@@ -3,44 +3,44 @@
   <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Checkpoints 与 Rewind 指南
+# Checkpoints 與 Rewind 指南
 
-checkpoints 是 Claude Code 新手最值得尽早掌握的安全机制之一。  
-它的意义很简单：**敢试，因为随时能回退。**
-
----
-
-## checkpoint 是什么
-
-可以把 checkpoint 理解成当前会话状态的快照，通常包括：
-
-- 对话消息
-- 文件改动
-- 工具使用历史
-- 会话上下文
-
-当你需要回退时，就使用 `rewind` 返回到某个 checkpoint。
+checkpoints 是 Claude Code 新手最值得儘早掌握的安全機制之一。  
+它的意義很簡單：**敢試，因為隨時能回退。**
 
 ---
 
-## 为什么它重要
+## checkpoint 是什麼
 
-很多人不敢放手让 Claude 改代码，不是因为能力不够，而是因为怕改坏。checkpoints 解决的就是这个心理门槛。
+可以把 checkpoint 理解成當前會話狀態的快照，通常包括：
 
-适合这些场景：
+- 對話訊息
+- 檔案改動
+- 工具使用歷史
+- 會話上下文
 
-- 大胆试不同方案
-- 复杂重构
-- 出现错误后回滚
-- 比较两个实现方向
+當你需要回退時，就使用 `rewind` 返回到某個 checkpoint。
 
 ---
 
-## 怎么打开
+## 為什麼它重要
 
-### 键盘方式
+很多人不敢放手讓 Claude 改程式碼，不是因為能力不夠，而是因為怕改壞。checkpoints 解決的就是這個心理門檻。
 
-按 `Esc` 两次。
+適合這些場景：
+
+- 大膽試不同方案
+- 複雜重構
+- 出現錯誤後回滾
+- 比較兩個實現方向
+
+---
+
+## 怎麼開啟
+
+### 鍵盤方式
+
+按 `Esc` 兩次。
 
 ### 命令方式
 
@@ -48,83 +48,83 @@ checkpoints 是 Claude Code 新手最值得尽早掌握的安全机制之一。
 /rewind
 ```
 
-`/checkpoint` 也可以作为别名使用。
+`/checkpoint` 也可以作為別名使用。
 
 ---
 
-## rewind 时你会看到什么选项
+## rewind 時你會看到什麼選項
 
-常见有这些：
+常見有這些：
 
-1. **Restore code and conversation**：代码和对话都回退
-2. **Restore conversation**：只回退对话
-3. **Restore code**：只回退代码
-4. **Summarize from here**：从这一点开始压缩总结
+1. **Restore code and conversation**：程式碼和對話都回退
+2. **Restore conversation**：只回退對話
+3. **Restore code**：只回退程式碼
+4. **Summarize from here**：從這一點開始壓縮總結
 5. **Never mind**：取消
 
 ---
 
-## checkpoints 默认就有
+## checkpoints 預設就有
 
-Claude Code 会自动创建 checkpoints，所以你不需要手动先“存档”才能用。
+Claude Code 會自動建立 checkpoints，所以你不需要手動先“存檔”才能用。
 
-这意味着你可以把它当作日常工作流的一部分，而不是紧急救火功能。
+這意味著你可以把它當作日常工作流的一部分，而不是緊急救火功能。
 
 ---
 
-## 一个很实用的工作流
+## 一個很實用的工作流
 
 ```text
-先让 Claude 改
-→ 如果结果好，继续
-→ 如果不满意，/rewind
-→ 换一种实现路线
+先讓 Claude 改
+→ 如果結果好，繼續
+→ 如果不滿意，/rewind
+→ 換一種實現路線
 ```
 
-这在这些任务里尤其好用：
+這在這些任務裡尤其好用：
 
-- UI 重构
-- API 重构
-- auth / permission 变更
-- 大批量文档整理
-
----
-
-## 新手最容易忽略的点
-
-### 1. checkpoint 不只是“撤销”
-
-它不只是救错，还可以帮助你探索多种实现方案。
-
-### 2. rewind 不一定要连代码一起退
-
-有时你只是想保留代码，但回退对话；或者相反。这个选择很有用。
-
-### 3. summarize from here 很适合长会话
-
-当上下文太长时，你可以用 summary 代替完整历史，减少上下文负担。
+- UI 重構
+- API 重構
+- auth / permission 變更
+- 大批次檔案整理
 
 ---
 
-## 常见使用场景
+## 新手最容易忽略的點
 
-| 场景 | 建议做法 |
+### 1. checkpoint 不只是“撤銷”
+
+它不只是救錯，還可以幫助你探索多種實現方案。
+
+### 2. rewind 不一定要連程式碼一起退
+
+有時你只是想保留程式碼，但回退對話；或者相反。這個選擇很有用。
+
+### 3. summarize from here 很適合長會話
+
+當上下文太長時，你可以用 summary 代替完整歷史，減少上下文負擔。
+
+---
+
+## 常見使用場景
+
+| 場景 | 建議做法 |
 |------|----------|
-| 试两种不同实现 | 做一次改动后 `/rewind` 回去重试 |
-| 大型重构 | 每走一段就确认 checkpoint |
-| Claude 改坏了 | 回到上一个稳定状态 |
-| 会话太长 | 用 summary 压缩后继续 |
+| 試兩種不同實現 | 做一次改動後 `/rewind` 回去重試 |
+| 大型重構 | 每走一段就確認 checkpoint |
+| Claude 改壞了 | 回到上一個穩定狀態 |
+| 會話太長 | 用 summary 壓縮後繼續 |
 
 ---
 
-## 中国用户特别注意
+## 新手使用者特別注意
 
-如果你在本地化或改写示例文档时做大范围文本替换，checkpoints 也非常有用。  
-因为这类修改很容易“看起来都对，实际把命令名或字段名翻坏”，有 checkpoint 会安全很多。
+如果你在在地化或改寫範例檔案時做大範圍文字替換，checkpoints 也非常有用。  
+因為這類修改很容易“看起來都對，實際把命令名或欄位名翻壞”，有 checkpoint 會安全很多。
 
 ---
 
-## 推荐下一步
+## 推薦下一步
 
-- 想学命令行和 print mode：看 [10-cli](../10-cli/)
-- 想学更复杂的规划与权限控制：看 [09-advanced-features](../09-advanced-features/)
+- 想學命令列和 print mode：看 [10-cli](../10-cli/)
+- 想學更復雜的規劃與許可權控制：看 [09-advanced-features](../09-advanced-features/)

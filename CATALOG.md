@@ -3,128 +3,130 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Claude Code 功能总表（Feature Catalog）
+# Claude Code 功能總表（Feature Catalog）
 
-> 适合“先建立全局地图，再进入某个模块”的读者。
+> 適合“先建立全域地圖，再進入某個模組”的讀者。
 
-**快速导航**：  
+**快速導航**：  
 [Slash Commands](#slash-commands) | [Permission Modes](#permission-modes) | [Subagents](#subagents) | [Skills](#skills) | [Plugins](#plugins) | [MCP](#mcp) | [Hooks](#hooks) | [Memory](#memory) | [新功能提示](#新功能提示)
 
 ---
 
 ## Summary
 
-| 类别 | 内建能力 | 仓库示例 | 适合先学吗 | 入口 |
+| 類別 | 內建能力 | 倉庫範例 | 適合先學嗎 | 入口 |
 |------|----------|----------|------------|------|
-| Slash Commands | 55+ | 8 | 非常适合 | [01-slash-commands/](01-slash-commands/) |
-| Memory | 7 类 | 3 | 非常适合 | [02-memory/](02-memory/) |
-| Skills | 5 个 bundled skills + 示例 | 多个 | 适合进阶 | [03-skills/](03-skills/) |
-| Subagents | 6 个内建 | 多个 | 适合进阶 | [04-subagents/](04-subagents/) |
-| MCP | 1 个内建生态入口 + 示例 | 多个 | 适合集成场景 | [05-mcp/](05-mcp/) |
-| Hooks | 25 个事件 | 7 | 适合自动化 | [06-hooks/](06-hooks/) |
-| Plugins | - | 3 | 适合团队级方案 | [07-plugins/](07-plugins/) |
-| Checkpoints | 内建 | 示例文档 | 新手必学 | [08-checkpoints/](08-checkpoints/) |
-| Advanced Features | 多项 | 示例文档 | 高阶再学 | [09-advanced-features/](09-advanced-features/) |
-| CLI | 内建 | 参考文档 | 全阶段都用得到 | [10-cli/](10-cli/) |
+| Slash Commands | 55+ | 8 | 非常適合 | [01-slash-commands/](01-slash-commands/) |
+| Memory | 7 類 | 3 | 非常適合 | [02-memory/](02-memory/) |
+| Skills | 5 個 bundled skills + 範例 | 多個 | 適合進階 | [03-skills/](03-skills/) |
+| Subagents | 6 個內建 | 多個 | 適合進階 | [04-subagents/](04-subagents/) |
+| MCP | 1 個內建生態入口 + 範例 | 多個 | 適合整合場景 | [05-mcp/](05-mcp/) |
+| Hooks | 25 個事件 | 7 | 適合自動化 | [06-hooks/](06-hooks/) |
+| Plugins | - | 3 | 適合團隊級方案 | [07-plugins/](07-plugins/) |
+| Checkpoints | 內建 | 範例檔案 | 新手必學 | [08-checkpoints/](08-checkpoints/) |
+| Advanced Features | 多項 | 範例檔案 | 高階再學 | [09-advanced-features/](09-advanced-features/) |
+| CLI | 內建 | 參考檔案 | 全階段都用得到 | [10-cli/](10-cli/) |
 
 ---
 
 ## Slash Commands
 
-slash commands 是用户在 Claude Code 里主动输入的快捷操作，例如 `/help`、`/model`、`/rewind`。这也是新手最容易立刻感受到收益的能力。
+slash commands 是使用者在 Claude Code 裡主動輸入的快捷操作，例如 `/help`、`/model`、`/rewind`。這也是新手最容易立刻感受到收益的能力。
 
-### 常见内建命令
+### 常見內建命令
 
 | 命令 | 用途 |
 |------|------|
-| `/help` | 查看帮助 |
-| `/clear` | 清空当前对话 |
-| `/config` | 查看或编辑配置 |
-| `/agents` | 查看可用 agents |
-| `/skills` | 查看可用 skills |
-| `/hooks` | 查看 hooks |
-| `/mcp` | 查看或管理 MCP servers |
+| `/help` | 檢視幫助 |
+| `/clear` | 清空當前對話 |
+| `/config` | 檢視或編輯設定 |
+| `/agents` | 檢視可用 agents |
+| `/skills` | 檢視可用 skills |
+| `/hooks` | 檢視 hooks |
+| `/mcp` | 檢視或管理 MCP servers |
 | `/plugin` | 管理 plugins |
-| `/plan` | 进入 planning mode |
+| `/plan` | 進入 planning mode |
 | `/rewind` | 回退到 checkpoint |
-| `/resume` | 恢复之前的 session |
-| `/branch` | 从当前对话分叉（某些版本中 `/fork` 仍可能可用） |
+| `/resume` | 復原之前的 session |
+| `/branch` | 從當前對話分叉（某些版本中 `/fork` 仍可能可用） |
 
-### 仓库里的示例命令
+### 倉庫裡的範例命令
 
-| 命令 | 文件 | 典型用途 |
+| 命令 | 檔案 | 典型用途 |
 |------|------|----------|
-| `/optimize` | `01-slash-commands/optimize.md` | 性能分析 |
-| `/pr` | `01-slash-commands/pr.md` | PR 准备流程 |
-| `/generate-api-docs` | `01-slash-commands/generate-api-docs.md` | API 文档生成 |
-| `/commit` | `01-slash-commands/commit.md` | 带上下文的提交说明 |
+| `/optimize` | `01-slash-commands/optimize.md` | 效能分析 |
+| `/pr` | `01-slash-commands/pr.md` | PR 準備流程 |
+| `/generate-api-docs` | `01-slash-commands/generate-api-docs.md` | API 檔案生成 |
+| `/commit` | `01-slash-commands/commit.md` | 帶上下文的提交說明 |
 | `/push-all` | `01-slash-commands/push-all.md` | stage + commit + push |
-| `/doc-refactor` | `01-slash-commands/doc-refactor.md` | 文档重构 |
+| `/doc-refactor` | `01-slash-commands/doc-refactor.md` | 檔案重構 |
 | `/setup-ci-cd` | `01-slash-commands/setup-ci-cd.md` | CI/CD 初始化 |
-| `/unit-test-expand` | `01-slash-commands/unit-test-expand.md` | 测试补全 |
+| `/unit-test-expand` | `01-slash-commands/unit-test-expand.md` | 測試補全 |
 
-**适合先学的原因**：复制文件就能用，反馈快，挫败感低。
+**適合先學的原因**：複製檔案就能用，回饋快，挫敗感低。
 
 ---
 
 ## Permission Modes
 
-permission modes 决定 Claude Code 在使用工具时需要多大授权。
+permission modes 決定 Claude Code 在使用工具時需要多大授權。
 
-| 模式 | 说明 | 适合什么时候 |
+| 模式 | 說明 | 適合什麼時候 |
 |------|------|--------------|
-| `default` | 大多数风险操作前询问 | 日常交互 |
-| `acceptEdits` | 自动接受文件编辑，其他操作仍可能询问 | 较信任的本地编辑 |
-| `plan` | 只读分析，不做修改 | 方案设计、代码阅读 |
-| `dontAsk` | 跳过需要额外授权的动作 | 非交互脚本 |
-| `bypassPermissions` | 跳过权限检查 | 可信、受控的自动化环境 |
-| `auto` | 根据分类器自动决定 | 高自动化流程（需要谨慎） |
+| `default` | 大多數風險操作前詢問 | 日常互動 |
+| `acceptEdits` | 自動接受檔案編輯，其他操作仍可能詢問 | 較信任的本機編輯 |
+| `plan` | 只讀分析，不做修改 | 方案設計、程式碼閱讀 |
+| `dontAsk` | 跳過需要額外授權的動作 | 非互動腳本 |
+| `bypassPermissions` | 跳過許可權檢查 | 可信、受控的自動化環境 |
+| `auto` | 根據分類器自動決定 | 高自動化流程（需要謹慎） |
 
-中国用户在刚上手时，优先理解 `default`、`acceptEdits`、`plan`、`dontAsk` 这四个就足够了。
+新手使用者在剛上手時，優先理解 `default`、`acceptEdits`、`plan`、`dontAsk` 這四個就足夠了。
 
 ---
 
 ## Subagents
 
-subagents 是专门负责某类任务的子代理。它们适合复杂任务拆分，比如“一个做代码审查，一个做测试，一个做文档”。
+subagents 是專門負責某類任務的子代理程式。它們適合複雜任務拆分，比如“一個做程式碼審查，一個做測試，一個做檔案”。
 
-### 常见内建 subagents
+### 常見內建 subagents
 
-| 名称 | 典型用途 |
+| 名稱 | 典型用途 |
 |------|----------|
-| `general-purpose` | 通用复杂任务 |
-| `Plan` | 方案设计 |
-| `Explore` | 快速搜索与理解代码 |
-| `Bash` | 终端命令执行 |
+| `general-purpose` | 通用複雜任務 |
+| `Plan` | 方案設計 |
+| `Explore` | 快速搜尋與理解程式碼 |
+| `Bash` | 終端命令執行 |
 
-### 仓库里的示例 subagents
+### 倉庫裡的範例 subagents
 
-| 名称 | 文件 | 用途 |
+| 名稱 | 檔案 | 用途 |
 |------|------|------|
-| `code-reviewer` | `04-subagents/code-reviewer.md` | 代码质量审查 |
-| `test-engineer` | `04-subagents/test-engineer.md` | 测试策略 |
-| `documentation-writer` | `04-subagents/documentation-writer.md` | 文档撰写 |
-| `secure-reviewer` | `04-subagents/secure-reviewer.md` | 安全审查 |
-| `implementation-agent` | `04-subagents/implementation-agent.md` | 实现任务 |
+| `code-reviewer` | `04-subagents/code-reviewer.md` | 程式碼品質審查 |
+| `test-engineer` | `04-subagents/test-engineer.md` | 測試策略 |
+| `documentation-writer` | `04-subagents/documentation-writer.md` | 檔案撰寫 |
+| `secure-reviewer` | `04-subagents/secure-reviewer.md` | 安全審查 |
+| `implementation-agent` | `04-subagents/implementation-agent.md` | 實現任務 |
 | `debugger` | `04-subagents/debugger.md` | 根因分析 |
-| `data-scientist` | `04-subagents/data-scientist.md` | 数据与 SQL 分析 |
+| `data-scientist` | `04-subagents/data-scientist.md` | 資料與 SQL 分析 |
 
 ---
 
 ## Skills
 
-skills 是 Claude Code 会根据描述自动触发的复用能力。它们往往比单个 slash command 更适合长期维护的工作流。
+skills 是 Claude Code 會根據描述自動觸發的複用能力。它們往往比單個 slash command 更適合長期維護的工作流。
 
-### 仓库里的示例 skills
+### 倉庫裡的範例 skills
 
-| 名称 | 文件夹 | 典型用途 |
+| 名稱 | 資料夾 | 典型用途 |
 |------|--------|----------|
-| `code-review` | `03-skills/code-review/` | 代码审查 |
-| `brand-voice` | `03-skills/brand-voice/` | 文案语气统一 |
-| `doc-generator` | `03-skills/doc-generator/` | 文档生成 |
-| `refactor` | `03-skills/refactor/` | 结构化重构 |
+| `code-review` | `03-skills/code-review/` | 程式碼審查 |
+| `brand-voice` | `03-skills/brand-voice/` | 文案語氣統一 |
+| `doc-generator` | `03-skills/doc-generator/` | 檔案生成 |
+| `refactor` | `03-skills/refactor/` | 結構化重構 |
+| `blog-draft` | `03-skills/blog-draft/` | 部落格草稿生成 |
+| `claude-md` | `03-skills/claude-md/` | 生成或調整 `CLAUDE.md` |
 
-### skill 结构
+### skill 結構
 
 ```text
 .claude/skills/skill-name/
@@ -133,9 +135,9 @@ skills 是 Claude Code 会根据描述自动触发的复用能力。它们往往
 └── templates/
 ```
 
-### 高风险提醒
+### 高風險提醒
 
-`SKILL.md` 里的 frontmatter 是可执行配置的一部分，不要翻译这些字段：
+`SKILL.md` 裡的 frontmatter 是可執行設定的一部分，不要翻譯這些欄位：
 
 - `name`
 - `description`
@@ -146,7 +148,7 @@ skills 是 Claude Code 会根据描述自动触发的复用能力。它们往往
 
 ## Plugins
 
-plugins 适合“把整套方案打包给团队用”。它们通常会组合多个能力：
+plugins 適合“把整套方案打包給團隊用”。它們通常會組合多個能力：
 
 - slash commands
 - skills
@@ -154,15 +156,15 @@ plugins 适合“把整套方案打包给团队用”。它们通常会组合多
 - MCP
 - hooks
 
-### 仓库里的示例 plugins
+### 倉庫裡的範例 plugins
 
-| 名称 | 位置 | 用途 |
+| 名稱 | 位置 | 用途 |
 |------|------|------|
-| `pr-review` | `07-plugins/pr-review/` | PR 审查工作流 |
-| `documentation` | `07-plugins/documentation/` | 文档生成与同步 |
-| `devops-automation` | `07-plugins/devops-automation/` | 部署、监控与事故处理 |
+| `pr-review` | `07-plugins/pr-review/` | PR 審查工作流 |
+| `documentation` | `07-plugins/documentation/` | 檔案生成與同步 |
+| `devops-automation` | `07-plugins/devops-automation/` | 部署、監控與事故處理 |
 
-### plugin 结构
+### plugin 結構
 
 ```text
 plugin-name/
@@ -174,93 +176,128 @@ plugin-name/
 └── scripts/
 ```
 
-`.claude-plugin/plugin.json` 是 manifest，`name`、`version`、`description`、`license` 这些 key 不要翻。
+`.claude-plugin/plugin.json` 是 manifest，`name`、`version`、`description`、`license` 這些 key 不要翻。
 
 ---
 
 ## MCP
 
-MCP（Model Context Protocol）用于让 Claude Code 连接外部工具、服务和实时数据。
+MCP（Model Context Protocol）用於讓 Claude Code 連線外部工具、服務和實時資料。
 
-### 仓库里的典型 MCP 配置
+### 倉庫裡的典型 MCP 設定
 
-| 文件 | 用途 |
+| 檔案 | 用途 |
 |------|------|
-| `05-mcp/github-mcp.json` | GitHub 集成 |
-| `05-mcp/database-mcp.json` | 数据库访问 |
-| `05-mcp/filesystem-mcp.json` | 文件系统访问 |
-| `05-mcp/multi-mcp.json` | 多服务组合 |
+| `05-mcp/github-mcp.json` | GitHub 整合 |
+| `05-mcp/database-mcp.json` | 資料庫訪問 |
+| `05-mcp/filesystem-mcp.json` | 檔案系統訪問 |
+| `05-mcp/multi-mcp.json` | 多服務組合 |
 
-### 中国用户常见卡点
+### 新手使用者常見卡點
 
-- `npx` 首次安装 MCP server 时很慢
-- GitHub Token 没权限或没导出
-- Windows / WSL 环境下 shell 和路径行为不同
+- `npx` 首次安裝 MCP server 時很慢
+- GitHub Token 沒許可權或沒匯出
+- Windows / WSL 環境下 shell 和路徑行為不同
 
-### 高风险提醒
+### 高風險提醒
 
-以下内容不要翻：
+以下內容不要翻：
 
 - `mcpServers`
-- server 名称，例如 `github`
-- 环境变量名，例如 `GITHUB_TOKEN`
-- 路径占位符和命令字段
+- server 名稱，例如 `github`
+- 環境變數名，例如 `GITHUB_TOKEN`
+- 路徑佔位符和命令欄位
 
 ---
 
 ## Hooks
 
-hooks 是事件驱动的自动化动作。适合这些场景：
+hooks 是事件驅動的自動化動作。適合這些場景：
 
-- 调工具前做风险拦截
-- 提交前跑测试
-- 改完代码后自动格式化
-- 结束前记录上下文
+- 調工具前做風險攔截
+- 提交前跑測試
+- 改完程式碼後自動格式化
+- 結束前記錄上下文
 
-### 仓库里的示例 hooks
+### 倉庫裡的範例 hooks
 
-| 文件 | 用途 |
+| 檔案 | 用途 |
 |------|------|
-| `06-hooks/pre-commit.sh` | 提交前跑测试 |
-| `06-hooks/format-code.sh` | 自动格式化 |
-| `06-hooks/security-scan.sh` | 安全检查 |
-| `06-hooks/validate-prompt.sh` | prompt 校验 |
-| `06-hooks/log-bash.sh` | Bash 日志记录 |
+| `06-hooks/pre-commit.sh` | 提交前跑測試 |
+| `06-hooks/format-code.sh` | 自動格式化 |
+| `06-hooks/security-scan.sh` | 安全檢查 |
+| `06-hooks/validate-prompt.sh` | prompt 校驗 |
+| `06-hooks/log-bash.sh` | Bash 日誌記錄 |
 
-### hook 类型
+### hook 型別
 
 - `command`
 - `http`
 - `prompt`
 - `agent`
 
-这些类型名同样不要翻成中文字段。
+這些型別名同樣不要翻成中文欄位。
 
 ---
 
 ## Memory
 
-memory 是 Claude Code 用来长期加载规则和上下文的机制。
+memory 是 Claude Code 用來長期載入規則和上下文的機制。
 
-### 本仓库里的 memory 示例
+### 本倉庫裡的 memory 範例
 
-| 文件 | 用途 |
+| 檔案 | 用途 |
 |------|------|
-| `02-memory/project-CLAUDE.md` | 项目规则 |
-| `02-memory/personal-CLAUDE.md` | 个人偏好 |
-| `02-memory/directory-api-CLAUDE.md` | 目录级规则示例 |
+| `02-memory/project-CLAUDE.md` | 專案規則 |
+| `02-memory/personal-CLAUDE.md` | 個人偏好 |
+| `02-memory/directory-api-CLAUDE.md` | 目錄級規則範例 |
 
 ### 新手最重要的理解
 
-- `CLAUDE.md` 不是随便写笔记的地方，它更像项目规范和上下文入口。
-- 项目级和个人级 memory 适合放不同内容。
-- memory 很强，但它不替代 skills、hooks 和 slash commands。
+- `CLAUDE.md` 不是隨便寫筆記的地方，它更像專案規範和上下文入口。
+- 專案級和個人級 memory 適合放不同內容。
+- memory 很強，但它不替代 skills、hooks 和 slash commands。
+
+---
+
+## 互動學習工具
+
+這個倉庫內建了兩個互動式學習 skill，安裝後可以直接在 Claude Code 裡做自測和練習。
+
+| skill | 位置 | 用途 |
+|-------|------|------|
+| `self-assessment` | `.claude/skills/self-assessment/` | 評估目前水平、識別短板、生成個人化學習路徑 |
+| `lesson-quiz` | `.claude/skills/lesson-quiz/` | 針對單一模組出互動測驗題，檢查理解程度 |
+
+### 如何安裝
+
+```bash
+mkdir -p ~/.claude/skills
+cp -r .claude/skills/self-assessment ~/.claude/skills/
+cp -r .claude/skills/lesson-quiz ~/.claude/skills/
+```
+
+### 如何使用
+
+安裝後在 Claude Code 裡輸入：
+
+```text
+# 做整體水平自測
+/self-assessment
+
+# 對某個模組做測驗
+/lesson-quiz hooks
+/lesson-quiz 03
+```
+
+`self-assessment` 提供 Quick（2 分鐘）和 Deep（5 分鐘）兩種模式，最後會生成個人化學習路徑。  
+`lesson-quiz` 每次 8 題，支援 before / during / after 三種測驗時機，答完給出錯題解析。
 
 ---
 
 ## 新功能提示
 
-这个仓库同步的是 Claude Code 较新的能力集，因此你会在文档里频繁看到这些内容：
+這個倉庫同步的是 Claude Code 較新的能力集，因此你會在檔案裡頻繁看到這些內容：
 
 - Auto Mode
 - Voice Dictation
@@ -271,11 +308,11 @@ memory 是 Claude Code 用来长期加载规则和上下文的机制。
 - web sessions
 - remote control
 
-如果你是初学者，不需要先掌握这些。按 [LEARNING-ROADMAP.md](LEARNING-ROADMAP.md) 的顺序往下学即可。
+如果你是初學者，不需要先掌握這些。按 [LEARNING-ROADMAP.md](LEARNING-ROADMAP.md) 的順序往下學即可。
 
 ---
 
-## 推荐阅读顺序
+## 推薦閱讀順序
 
 1. [README.md](README.md)
 2. [LEARNING-ROADMAP.md](LEARNING-ROADMAP.md)

@@ -6,7 +6,7 @@
 # CLI 指南
 
 Claude Code 的 CLI 是最核心的使用入口。  
-很多功能看起来像“对话式能力”，但真正要高效使用、做自动化、接入脚本或 CI/CD，最后都绕不开 CLI。
+很多功能看起來像“對話式能力”，但真正要高效使用、做自動化、接入腳本或 CI/CD，最後都繞不開 CLI。
 
 ---
 
@@ -14,31 +14,31 @@ Claude Code 的 CLI 是最核心的使用入口。
 
 | 命令 | 用途 |
 |------|------|
-| `claude` | 打开交互模式 |
-| `claude "query"` | 带初始问题进入 REPL |
-| `claude -p "query"` | print mode，一次执行后退出 |
-| `claude -c` | 继续最近一次会话 |
-| `claude -r "session"` | 恢复指定 session |
+| `claude` | 開啟互動模式 |
+| `claude "query"` | 帶初始問題進入 REPL |
+| `claude -p "query"` | print mode，一次執行後退出 |
+| `claude -c` | 繼續最近一次會話 |
+| `claude -r "session"` | 復原指定 session |
 | `claude mcp` | 管理 MCP |
-| `claude agents` | 查看 agents |
+| `claude agents` | 檢視 agents |
 | `claude plugin` | 管理 plugins |
-| `claude remote-control` | 启动远程控制 |
-| `claude auth status` | 查看登录状态 |
+| `claude remote-control` | 啟動遠端控制 |
+| `claude auth status` | 檢視登入狀態 |
 
-如果你是新手，先熟悉 `claude`、`claude -p`、`claude -c`、`claude -r` 就已经很有价值。
+如果你是新手，先熟悉 `claude`、`claude -p`、`claude -c`、`claude -r` 就已經很有價值。
 
 ---
 
-## 交互模式 vs print mode
+## 互動模式 vs print mode
 
-### 交互模式
+### 互動模式
 
-适合：
+適合：
 
-- 连续问答
-- 多轮上下文
-- 现场探索
-- 需要边改边聊
+- 連續問答
+- 多輪上下文
+- 現場探索
+- 需要邊改邊聊
 
 ```bash
 claude
@@ -47,70 +47,70 @@ claude "explain this project"
 
 ### print mode
 
-适合：
+適合：
 
-- 一次性任务
-- shell 脚本
+- 一次性任務
+- shell 腳本
 - CI/CD
-- 通过 pipe 处理输入
-- 结构化输出
+- 透過 pipe 處理輸入
+- 結構化輸出
 
 ```bash
 claude -p "what does this function do?"
 cat error.log | claude -p "explain this error"
 ```
 
-### 一个实用判断标准
+### 一個實用判斷標準
 
-- 你要连续来回对话：交互模式
-- 你要“给一条明确任务，然后退出”：print mode
+- 你要連續來回對話：互動模式
+- 你要“給一條明確任務，然後退出”：print mode
 
 ---
 
-## 新手最该掌握的 flags
+## 新手最該掌握的 flags
 
 | flag | 用途 |
 |------|------|
-| `-p, --print` | 进入 print mode |
-| `-c, --continue` | 继续最近一次会话 |
-| `-r, --resume` | 恢复指定 session |
-| `-n, --name` | 给 session 起名 |
-| `-w, --worktree` | 在 worktree 中启动 |
+| `-p, --print` | 進入 print mode |
+| `-c, --continue` | 繼續最近一次會話 |
+| `-r, --resume` | 復原指定 session |
+| `-n, --name` | 給 session 起名 |
+| `-w, --worktree` | 在 worktree 中啟動 |
 | `--model` | 指定模型 |
-| `--effort` | 指定思考强度 |
-| `--permission-mode` | 指定权限模式 |
-| `--bare` | 以最小模式启动 |
-| `--add-dir` | 加额外目录到工作上下文 |
+| `--effort` | 指定思考強度 |
+| `--permission-mode` | 指定許可權模式 |
+| `--bare` | 以最小模式啟動 |
+| `--add-dir` | 加額外目錄到工作上下文 |
 
 ---
 
-## 一些真正常用的例子
+## 一些真正常用的範例
 
-### 查看项目
+### 檢視專案
 
 ```bash
 claude "explain this project"
 ```
 
-### 处理日志
+### 處理日誌
 
 ```bash
 cat error.log | claude -p "explain this error"
 ```
 
-### 继续最近一次工作
+### 繼續最近一次工作
 
 ```bash
 claude -c
 ```
 
-### 恢复命名会话
+### 復原命名會話
 
 ```bash
 claude -r "auth-refactor" "finish this task"
 ```
 
-### 用于自动化
+### 用於自動化
 
 ```bash
 claude -p "Run tests and summarize failures" --permission-mode dontAsk
@@ -118,9 +118,9 @@ claude -p "Run tests and summarize failures" --permission-mode dontAsk
 
 ---
 
-## 模型与配置
+## 模型與設定
 
-CLI 常见会和这些配置一起使用：
+CLI 常見會和這些設定一起使用：
 
 - `--model`
 - `--fallback-model`
@@ -128,7 +128,7 @@ CLI 常见会和这些配置一起使用：
 - `--settings`
 - `--append-system-prompt`
 
-示例：
+範例：
 
 ```bash
 claude --model opus "design a caching strategy"
@@ -136,13 +136,13 @@ claude -p --fallback-model sonnet "summarize this diff"
 claude --append-system-prompt "Always explain tradeoffs" "review this plan"
 ```
 
-如果你要长期使用 Claude Code，把模型、权限、输出格式这些参数理解清楚，会直接影响效率和成本。
+如果你要長期使用 Claude Code，把模型、許可權、輸出格式這些引數理解清楚，會直接影響效率和成本。
 
 ---
 
-## 工具与权限相关 flags
+## 工具與許可權相關 flags
 
-下面这些参数非常重要，但也是最容易被误用的一组：
+下面這些引數非常重要，但也是最容易被誤用的一組：
 
 - `--permission-mode`
 - `--dangerously-skip-permissions`
@@ -150,69 +150,69 @@ claude --append-system-prompt "Always explain tradeoffs" "review this plan"
 - `--disallowedTools`
 - `--tools`
 
-### 实用例子
+### 實用範例
 
 ```bash
-# 只做只读分析
+# 只做只讀分析
 claude --permission-mode plan "review this codebase"
 
-# 非交互测试摘要
+# 非互動測試摘要
 claude -p "Run tests" --permission-mode dontAsk
 
-# 限制工具范围
+# 限制工具範圍
 claude -p --tools "Read,Grep,Glob" "find all TODO comments"
 ```
 
 ---
 
-## 输出与格式
+## 輸出與格式
 
-如果你要把 Claude Code 接进脚本或程序，最值得关注的是：
+如果你要把 Claude Code 接進腳本或程式，最值得關注的是：
 
 - `--output-format`
 - `--json-schema`
 - `--include-partial-messages`
 
-### 常见使用方式
+### 常見使用方式
 
 ```bash
-# 默认文本输出
+# 預設文字輸出
 claude -p "explain this code"
 
-# JSON 输出
+# JSON 輸出
 claude -p --output-format json "list all functions in main.py"
 
-# 用 schema 约束结构
+# 用 schema 約束結構
 claude -p --json-schema '{"type":"object"}' "return structured analysis"
 ```
 
-如果你的下游还要接 `jq`、Python、Node 或 CI job，结构化输出会非常有用。
+如果你的下游還要接 `jq`、Python、Node 或 CI job，結構化輸出會非常有用。
 
 ---
 
-## workspace 与多目录
+## workspace 與多目錄
 
-如果你需要让 Claude 同时看多个目录，可以用：
+如果你需要讓 Claude 同時看多個目錄，可以用：
 
 ```bash
 claude --add-dir ../frontend ../backend ../shared "find all API endpoints"
 ```
 
-这对 monorepo、前后端分仓或跨目录排查问题特别有帮助。
+這對 monorepo、前後端分倉或跨目錄排查問題特別有幫助。
 
 ---
 
-## MCP 与 plugin 相关 CLI
+## MCP 與 plugin 相關 CLI
 
-你不只会在文档里看到：
+你不只會在檔案裡看到：
 
 - `claude mcp`
 - `claude mcp serve`
 - `claude plugin`
 
-你实际使用中也经常会碰到它们。
+你實際使用中也經常會碰到它們。
 
-### 典型场景
+### 典型場景
 
 ```bash
 claude mcp
@@ -220,140 +220,158 @@ claude mcp serve
 claude plugin install my-plugin
 ```
 
-如果你要做自动化、集成第三方系统或团队分发，这些命令迟早会用到。
+如果你要做自動化、整合第三方系統或團隊分發，這些命令遲早會用到。
 
 ---
 
 ## session 管理
 
-当你开始做稍复杂的工作后，session 管理会非常重要。
+當你開始做稍複雜的工作後，session 管理會非常重要。
 
-常见场景：
+常見場景：
 
-- 延续昨天的任务
-- 给当前任务起名
-- 从当前会话分叉出实验方案
+- 延續昨天的任務
+- 給當前任務起名
+- 從當前會話分叉出實驗方案
 
 常用命令和 flags：
 
 - `/resume`
 - `/rename`
-- `/fork`
+- `/branch`（較新的主名稱，部分舊環境中 `/fork` 仍可能可用）
 - `claude -c`
 - `claude -r`
 
-不命名 session，前期感觉没问题，后期会越来越难管理。
+不命名 session，前期感覺沒問題，後期會越來越難管理。
 
 ---
 
-## CLI 和自动化的关系
+## CLI 和自動化的關係
 
-当你要做这些事情时，CLI 会变得尤其重要：
+當你要做這些事情時，CLI 會變得尤其重要：
 
 - CI/CD
-- shell 脚本
-- 批处理
-- JSON 输出
-- 定时任务
-- 后台任务编排
+- shell 腳本
+- 批處理
+- JSON 輸出
+- 定時任務
+- 後臺任務編排
 
-很多“高级能力”最后都会落回 CLI 参数和脚本调用层。
+很多“高階能力”最後都會落回 CLI 引數和腳本呼叫層。
 
-所以如果你真想把 Claude Code 用深，CLI 不是可选项，而是核心能力。
+所以如果你真想把 Claude Code 用深，CLI 不是可選項，而是核心能力。
 
 ---
 
-## 哪些内容绝对不能翻
+## 哪些內容絕對不能翻
 
-如果你在本地化文档，这些内容必须保持英文原样：
+如果你在在地化檔案，這些內容必須保持英文原樣：
 
 - `claude`
 - `claude -p`
 - flags，例如 `--model`、`--permission-mode`
 - 子命令，例如 `claude mcp`、`claude plugin`
-- 输出格式名，例如 `json`
+- 輸出格式名，例如 `json`
 
-CLI 是最典型的“说明文本可以翻，命令本身不能翻”的内容。
+CLI 是最典型的“說明文字可以翻，命令本身不能翻”的內容。
 
 ---
 
-## 中国用户特别注意
+## 新手使用者特別注意
 
-### 1. 网络环境
+### 1. 網路環境
 
-如果你在公司网络、代理或受控环境下使用 CLI，先确认：
+如果你在公司網路、代理程式或受控環境下使用 CLI，先確認：
 
-- API 访问
-- GitHub 连通性
-- npm / uv / Python 依赖下载
-- 证书与代理设置
+- API 訪問
+- GitHub 連通性
+- npm / uv / Python 依賴下載
+- 證書與代理程式設定
 
-### 2. Windows / WSL 差异
+### 2. Windows / WSL 差異
 
-Windows 用户建议尽早确认自己使用的是：
+Windows 使用者建議儘早確認自己使用的是：
 
 - PowerShell
 - Git Bash
 - WSL
 
-这会直接影响路径、命令行为和脚本兼容性。
+這會直接影響路徑、命令列為和腳本相容性。
 
-### 3. 自动化不要一开始就开太猛
+### 3. 自動化不要一開始就開太猛
 
-建议从这些低风险任务开始：
+建議從這些低風險任務開始：
 
-- 日志解释
-- 测试摘要
-- 结构化分析
+- 日誌解釋
+- 測試摘要
+- 結構化分析
 
-不要一开始就上高权限全自动修改流程。
+不要一開始就上高許可權全自動修改流程。
 
 ---
 
-## 常见坑
+## 常見坑
 
-### 1. 把 print mode 当普通聊天
+### 1. 把 print mode 當普通聊天
 
-`claude -p` 更适合一次性、明确输入输出的任务。
+`claude -p` 更適合一次性、明確輸入輸出的任務。
 
-### 2. 不给 session 命名
+### 2. 不給 session 命名
 
-短期还行，任务一多就会混乱。
+短期還行，任務一多就會混亂。
 
-### 3. 翻译 CLI flags
+### 3. 翻譯 CLI flags
 
-这会让用户复制命令后直接失败。
+這會讓使用者複製命令後直接失敗。
 
-### 4. 没区分“能跑”和“适合自动化”
+### 4. 沒區分“能跑”和“適合自動化”
 
-某个命令能跑，不代表它就适合直接放进 CI/CD。
+某個命令能跑，不代表它就適合直接放進 CI/CD。
 
 ---
 
 ## Troubleshooting
 
-如果 CLI 行为不符合预期，优先排查：
+如果 CLI 行為不符合預期，優先排查：
 
-1. 当前是不是该用交互模式，而不是 print mode
-2. flags 是否拼对
-3. 权限模式是否合适
-4. 环境变量是否已导出
-5. 当前 shell / 路径环境是否匹配
+1. 當前是不是該用互動模式，而不是 print mode
+2. flags 是否拼對
+3. 許可權模式是否合適
+4. 環境變數是否已匯出
+5. 當前 shell / 路徑環境是否匹配
 
 ---
 
 ## Best Practices
 
-- 先熟练 `claude`、`claude -p`、`claude -c`、`claude -r`
-- 自动化从小任务开始
-- 所有 CLI 示例都保留英文原样
-- 把 session 命名当成好习惯
-- 中国用户优先排除网络与 shell 环境问题
+- 先熟練 `claude`、`claude -p`、`claude -c`、`claude -r`
+- 自動化從小任務開始
+- 所有 CLI 範例都保留英文原樣
+- 把 session 命名當成好習慣
+- 新手使用者優先排除網路與 shell 環境問題
 
 ---
 
-## 推荐下一步
+## 本目錄的範例腳本
 
-- 想更系统地看高级能力：看 [09-advanced-features](../09-advanced-features/)
-- 想查安装与路径：看 [QUICK_REFERENCE.md](../QUICK_REFERENCE.md)
-- 想结合 hooks / MCP / plugins：回看 [06-hooks](../06-hooks/)、[05-mcp](../05-mcp/)、[07-plugins](../07-plugins/)
+| 腳本 | 用途 |
+|------|------|
+| `ci-example.sh` | CI/CD 場景：測試摘要、靜態分析、PR diff 摘要 |
+| `pipe-example.sh` | Pipe 場景：日誌解釋、commit 摘要、程式碼解析、JSON 輸出 |
+
+```bash
+# 複製到專案使用
+cp 10-cli/ci-example.sh your-project/.github/scripts/
+cp 10-cli/pipe-example.sh your-project/scripts/
+
+# 直接試跑 pipe-example.sh 示範模式
+bash 10-cli/pipe-example.sh demo
+```
+
+---
+
+## 推薦下一步
+
+- 想更系統地看高階能力：看 [09-advanced-features](../09-advanced-features/)
+- 想查安裝與路徑：看 [QUICK_REFERENCE.md](../QUICK_REFERENCE.md)
+- 想結合 hooks / MCP / plugins：回看 [06-hooks](../06-hooks/)、[05-mcp](../05-mcp/)、[07-plugins](../07-plugins/)
