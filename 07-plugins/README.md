@@ -5,44 +5,44 @@
 
 # Plugins 指南
 
-如果说 skills、hooks、MCP、subagents 分别是单项能力，那么 plugins 就是把这些能力打包成“一整套可安装方案”的方式。
+如果說 skills、hooks、MCP、subagents 分別是單項能力，那麼 plugins 就是把這些能力打包成“一整套可安裝方案”的方式。
 
-对中国用户来说，plugin 章节之所以重要，不只是因为它“高级”，而是因为它最接近团队实际使用场景：一套命令、一套 agents、一套 hooks、一套外部集成，最好一次装好、一次分发。
+對新手使用者來說，plugin 章節之所以重要，不只是因為它“高階”，而是因為它最接近團隊實際使用場景：一套命令、一套 agents、一套 hooks、一套外部整合，最好一次裝好、一次分發。
 
 ---
 
-## plugin 是什么
+## plugin 是什麼
 
-plugin 通常会组合这些内容：
+plugin 通常會組合這些內容：
 
 - commands
 - skills
 - subagents
 - hooks
 - `.mcp.json`
-- 辅助脚本与模板
+- 輔助腳本與範本
 
-所以它特别适合：
+所以它特別適合：
 
-- 团队统一工作流
-- 跨项目复用
-- 把一套最佳实践做成可分发单元
-
----
-
-## plugin 的价值到底在哪里
-
-当你已经有很多零散配置时，plugin 解决的是：
-
-- 怎么一次装完整套能力
-- 怎么让团队成员拿到一致配置
-- 怎么让“个人技巧”变成“团队资产”
-
-如果你已经有单独的 slash command、skill、subagent、hook 在工作，那么下一步自然就是考虑是否要把它们打包。
+- 團隊統一工作流
+- 跨專案複用
+- 把一套最佳實踐做成可分發單元
 
 ---
 
-## 基本结构
+## plugin 的價值到底在哪裡
+
+當你已經有很多零散設定時，plugin 解決的是：
+
+- 怎麼一次裝完整套能力
+- 怎麼讓團隊成員取得一致設定
+- 怎麼讓“個人技巧”變成“團隊資產”
+
+如果你已經有單獨的 slash command、skill、subagent、hook 在工作，那麼下一步自然就是考慮是否要把它們打包。
+
+---
+
+## 基本結構
 
 ```text
 my-plugin/
@@ -58,30 +58,30 @@ my-plugin/
 └── docs/
 ```
 
-### 这些目录分别做什么
+### 這些目錄分別做什麼
 
-| 目录 | 用途 |
+| 目錄 | 用途 |
 |------|------|
 | `.claude-plugin/plugin.json` | plugin manifest |
-| `commands/` | 可直接调用的命令入口 |
-| `agents/` | 子代理定义 |
-| `skills/` | 自动触发或复用能力 |
-| `hooks/` | 自动化事件处理 |
-| `.mcp.json` | 外部系统接入 |
-| `scripts/` | 实际执行脚本 |
-| `templates/` | 输出模板 |
+| `commands/` | 可直接呼叫的命令入口 |
+| `agents/` | 子代理程式定義 |
+| `skills/` | 自動觸發或複用能力 |
+| `hooks/` | 自動化事件處理 |
+| `.mcp.json` | 外部系統接入 |
+| `scripts/` | 實際執行腳本 |
+| `templates/` | 輸出範本 |
 
 ---
 
-## manifest 结构与高风险字段
+## manifest 結構與高風險欄位
 
-plugin manifest 采用 JSON 格式，位置是：
+plugin manifest 採用 JSON 格式，位置是：
 
 ```text
 .claude-plugin/plugin.json
 ```
 
-一个最小示例：
+一個最小範例：
 
 ```json
 {
@@ -95,7 +95,7 @@ plugin manifest 采用 JSON 格式，位置是：
 }
 ```
 
-### 这些 key 不要翻
+### 這些 key 不要翻
 
 - `name`
 - `version`
@@ -103,195 +103,195 @@ plugin manifest 采用 JSON 格式，位置是：
 - `author`
 - `license`
 
-同样，plugin 名称本身也不要改成中文标识，否则会影响识别、安装和后续同步维护。
+同樣，plugin 名稱本身也不要改成中文標識，否則會影響識別、安裝和後續同步維護。
 
 ---
 
-## plugin 还有哪些可选能力
+## plugin 還有哪些可選能力
 
-### 1. LSP 支持
+### 1. LSP 支援
 
-plugin 可以通过 `.lsp.json` 或 manifest 中的 `lsp` 配置提供 LSP 支持。
+plugin 可以透過 `.lsp.json` 或 manifest 中的 `lsp` 設定提供 LSP 支援。
 
-适合：
+適合：
 
-- 语言诊断
-- 跳转定义
-- symbol 浏览
-- hover 信息
+- 語言診斷
+- 跳轉定義
+- symbol 瀏覽
+- hover 資訊
 
-### 2. 用户配置项
+### 2. 使用者設定項
 
-某些 plugin 会暴露用户可配置项，例如 API key、部署 region、开关参数。
+某些 plugin 會暴露使用者可設定項，例如 API key、部署 region、開關引數。
 
-### 3. 持久化数据
+### 3. 持久化資料
 
-某些 plugin 会使用持久化目录存储缓存、数据库或状态。
+某些 plugin 會使用持久化目錄儲存快取、資料庫或狀態。
 
-如果你在做团队级 plugin，这三类能力很值得提前规划。
+如果你在做團隊級 plugin，這三類能力很值得提前規劃。
 
 ---
 
-## 本目录里的示例 plugins
+## 本目錄裡的範例 plugins
 
-| plugin | 用途 | 适合谁 |
+| plugin | 用途 | 適合誰 |
 |--------|------|--------|
-| `pr-review` | PR 审查流程 | 代码审查较频繁的团队 |
-| `documentation` | 文档生成与同步 | 文档经常落后的项目 |
-| `devops-automation` | 部署、监控、事故处理 | 有稳定交付流程的团队 |
+| `pr-review` | PR 審查流程 | 程式碼審查較頻繁的團隊 |
+| `documentation` | 檔案生成與同步 | 檔案經常落後的專案 |
+| `devops-automation` | 部署、監控、事故處理 | 有穩定交付流程的團隊 |
 
 ### `pr-review`
 
-把安全检查、测试覆盖检查和性能影响分析整合进 PR 工作流。
+把安全檢查、測試覆蓋檢查和效能影響分析整合進 PR 工作流。
 
 ### `documentation`
 
-把 README、API docs、文档同步和校验整理成一套文档工作流。
+把 README、API docs、檔案同步和校驗整理成一套檔案工作流。
 
 ### `devops-automation`
 
-把部署、回滚、状态检查和 incident 响应整合起来。
+把部署、回滾、狀態檢查和 incident 響應整合起來。
 
 ---
 
-## 怎么安装
+## 怎麼安裝
 
-### Marketplace / 已发布 plugin
+### Marketplace / 已釋出 plugin
 
 ```text
 /plugin install pr-review
 ```
 
-### 本地开发 plugin
+### 本機開發 plugin
 
-如果你是在本地调试自己写的 plugin，一般会使用 Claude Code 支持的本地 plugin 目录或测试方式。
+如果你是在本機除錯自己寫的 plugin，一般會使用 Claude Code 支援的本機 plugin 目錄或測試方式。
 
-### 从 Git 仓库安装
+### 從 Git 倉庫安裝
 
-如果以后你把中文 plugin 发布到自己的仓库，建议在 README 中明确写出：
+如果以後你把中文 plugin 釋出到自己的倉庫，建議在 README 中明確寫出：
 
-- 仓库地址
-- 安装方式
-- 依赖条件
-- 支持平台
+- 倉庫地址
+- 安裝方式
+- 依賴條件
+- 支援平臺
 
 ---
 
-## 什么时候值得做 plugin
+## 什麼時候值得做 plugin
 
 ### 值得做 plugin
 
-- 你已经有多项能力要一起分发
-- 团队成员都要用
-- 安装过程需要足够简单
+- 你已經有多項能力要一起分發
+- 團隊成員都要用
+- 安裝過程需要足夠簡單
 - 你希望工作流版本化
 
-### 先别急着做 plugin
+### 先別急著做 plugin
 
-- 你还只有一个 command 或 skill
-- 工作流还没稳定
-- 需求变化很快
+- 你還只有一個 command 或 skill
+- 工作流還沒穩定
+- 需求變化很快
 
-这时通常先用单独的 skills、hooks 或 agents 更合适。
+這時通常先用單獨的 skills、hooks 或 agents 更合適。
 
 ---
 
-## 设计一个好 plugin 的建议
+## 設計一個好 plugin 的建議
 
-### 1. 先确定“解决哪个完整场景”
+### 1. 先確定“解決哪個完整場景”
 
-不要只是把几个文件塞一起。好的 plugin 通常对应一个完整场景，例如：
+不要只是把幾個檔案塞一起。好的 plugin 通常對應一個完整場景，例如：
 
-- 代码审查
-- 文档维护
-- 部署与事故处理
+- 程式碼審查
+- 檔案維護
+- 部署與事故處理
 
-### 2. 明确依赖边界
+### 2. 明確依賴邊界
 
-需要写清楚：
+需要寫清楚：
 
-- 外部服务依赖
+- 外部服務依賴
 - 必要的 token / env vars
 - 所需 CLI
-- 权限需求
+- 許可權需求
 
-### 3. 不要把实验性配置过早打包
+### 3. 不要把實驗性設定過早打包
 
-plugin 一旦面向团队分发，稳定性要求就会更高。
+plugin 一旦面向團隊分發，穩定性要求就會更高。
 
 ---
 
-## 中国用户特别注意
+## 新手使用者特別注意
 
-### 1. 外部服务依赖
+### 1. 外部服務依賴
 
-plugin 里经常带有：
+plugin 裡經常帶有：
 
 - GitHub
 - Kubernetes
 - 第三方 API
-- 网络 webhook
+- 網路 webhook
 
-不要默认这些服务在本地就能直接访问。
+不要預設這些服務在本機就能直接訪問。
 
-### 2. token / CLI / 环境变量
+### 2. token / CLI / 環境變數
 
-发布中文 plugin 时，建议 README 明确说明：
+釋出中文 plugin 時，建議 README 明確說明：
 
-- 依赖哪些外部服务
-- 需要哪些 token / CLI / 环境变量
-- Windows / WSL 是否支持
+- 依賴哪些外部服務
+- 需要哪些 token / CLI / 環境變數
+- Windows / WSL 是否支援
 
-### 3. 安装方式别写得太抽象
+### 3. 安裝方式別寫得太抽象
 
-中国用户最怕“概念都懂，但不知道下一步打什么命令”。  
-建议每个 plugin 至少给一个“最小安装路径”。
+新手使用者最怕“概念都懂，但不知道下一步打什麼命令”。  
+建議每個 plugin 至少給一個“最小安裝路徑”。
 
 ---
 
-## 常见坑
+## 常見坑
 
-### 1. 只改 README，不检查 manifest
+### 1. 只改 README，不檢查 manifest
 
-真正影响安装和识别的是 `.claude-plugin/plugin.json`，不是说明文。
+真正影響安裝和識別的是 `.claude-plugin/plugin.json`，不是說明文。
 
-### 2. 过早打包
+### 2. 過早打包
 
-如果工作流还不稳定，plugin 只会增加维护负担。
+如果工作流還不穩定，plugin 只會增加維護負擔。
 
-### 3. 把 plugin 名和命令名翻译掉
+### 3. 把 plugin 名和命令名翻譯掉
 
-这会直接影响调用、安装和同步维护。
+這會直接影響呼叫、安裝和同步維護。
 
-### 4. 没写清依赖
+### 4. 沒寫清依賴
 
-对中国用户来说，这是导致“看起来很强但根本跑不起来”的高频原因。
+對新手使用者來說，這是導致“看起來很強但根本跑不起來”的高頻原因。
 
 ---
 
 ## Troubleshooting
 
-如果 plugin 装了但不好用，优先排查：
+如果 plugin 裝了但不好用，優先排查：
 
 1. manifest 是否有效
-2. 依赖的 commands / agents / hooks / MCP 是否都在正确目录
-3. 外部服务是否能访问
-4. 环境变量是否正确导出
-5. 插件命名空间和命令名是否保持英文原样
+2. 依賴的 commands / agents / hooks / MCP 是否都在正確目錄
+3. 外部服務是否能訪問
+4. 環境變數是否正確匯出
+5. 外掛名稱空間和命令名是否保持英文原樣
 
 ---
 
 ## Best Practices
 
-- 先跑通单项能力，再打包
-- 保持 plugin 目标聚焦
-- 在 README 中明确依赖和适用场景
-- 不要为了中文化改坏 manifest 和命令标识
-- 团队发布前先做一轮真实安装演练
+- 先跑通單項能力，再打包
+- 保持 plugin 目標聚焦
+- 在 README 中明確依賴和適用場景
+- 不要為了中文化改壞 manifest 和命令標識
+- 團隊釋出前先做一輪真實安裝演練
 
 ---
 
-## 推荐下一步
+## 推薦下一步
 
-- 想先理解单项能力：回看 [03-skills](../03-skills/)、[04-subagents](../04-subagents/)、[05-mcp](../05-mcp/)、[06-hooks](../06-hooks/)
-- 想补高级工作流与权限控制：看 [09-advanced-features](../09-advanced-features/)
+- 想先理解單項能力：回看 [03-skills](../03-skills/)、[04-subagents](../04-subagents/)、[05-mcp](../05-mcp/)、[06-hooks](../06-hooks/)
+- 想補高階工作流與許可權控制：看 [09-advanced-features](../09-advanced-features/)

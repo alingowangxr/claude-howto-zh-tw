@@ -5,22 +5,22 @@
 
 # Contributing
 
-欢迎为这个中文本土化仓库继续贡献内容。
+歡迎為這個繁體中文化倉庫繼續貢獻內容。
 
-## 贡献方向
+## 貢獻方向
 
-- 改进中文表达
-- 补充中国用户常见坑
-- 修复无效链接和错误示例
-- 补全教程、模板、skills、plugins 示例
+- 改進中文表達
+- 補充新手使用者常見坑
+- 修復無效連結和錯誤範例
+- 補全教學、範本、skills、plugins 範例
 - 同步上游更新
 
-## 提交前请先看
+## 提交前請先看
 
 - [UPSTREAM.md](UPSTREAM.md)
 - [LOCALIZATION-STYLE.md](LOCALIZATION-STYLE.md)
 
-## 本地验证
+## 本機驗證
 
 ```bash
 uv venv
@@ -29,8 +29,8 @@ uv run python scripts/validate_localization.py
 uv run pytest scripts/tests/ -q
 ```
 
-## 贡献原则
+## 貢獻原則
 
-- 不要把可执行标识翻坏
-- 不要随意改目录结构和文件名
-- 修改时尽量保持和上游映射关系清楚
+- 不要把可執行標識翻壞
+- 不要隨意改目錄結構和檔名
+- 修改時儘量保持和上游對映關係清楚

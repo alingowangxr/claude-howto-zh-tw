@@ -1,4 +1,4 @@
-# ADR [Number]: [Title] / 架构决策记录
+# ADR [Number]: [Title] / 架構決策記錄
 
 ## Status
 
@@ -6,15 +6,15 @@
 
 ## Context
 
-这个决定要解决什么问题？
+這個決定要解決什麼問題？
 
 ## Decision
 
-我们决定采用什么方案？
+我們決定採用什麼方案？
 
 ## Consequences
 
-这个决定带来哪些影响？
+這個決定帶來哪些影響？
 
 ### Positive
 
@@ -33,4 +33,4 @@
 
 ## Alternatives Considered
 
-还考虑过哪些方案？为什么没选？
+還考慮過哪些方案？為什麼沒選？

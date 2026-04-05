@@ -1,8 +1,8 @@
-# Function: `functionName` / 函数文档模板
+# Function: `functionName` / 函式檔案範本
 
 ## Description
 
-简要说明函数做什么。
+簡要說明函式做什麼。
 
 ## Signature
 
@@ -14,8 +14,8 @@ function functionName(param1: Type1, param2: Type2): ReturnType
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| param1 | Type1 | Yes | param1 说明 |
-| param2 | Type2 | No | param2 说明 |
+| param1 | Type1 | Yes | param1 說明 |
+| param2 | Type2 | No | param2 說明 |
 
 ## Returns
 

@@ -1,6 +1,6 @@
 # Quick Start - Brand Assets
 
-## 复制资源
+## 複製資源
 
 ```bash
 cp -r resources/ /path/to/your/website/

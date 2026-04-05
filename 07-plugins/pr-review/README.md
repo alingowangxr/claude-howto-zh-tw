@@ -3,17 +3,17 @@
   <img alt="Claude How To" src="../../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# PR Review 插件
+# PR Review 外掛
 
-把安全检查、测试检查、性能检查和 PR 审查打包成一套工作流。
+把安全檢查、測試檢查、效能檢查和 PR 審查打包成一套工作流。
 
 ## Features
 
 - 安全分析
-- 测试覆盖检查
-- 文档检查
-- 代码质量审查
-- 性能影响分析
+- 測試覆蓋檢查
+- 檔案檢查
+- 程式碼品質審查
+- 效能影響分析
 
 ## Installation
 
@@ -37,54 +37,54 @@
 
 ## Requirements
 
-- Git 仓库
-- GitHub 访问
-- 必要时设置 `GITHUB_TOKEN`
+- Git 倉庫
+- GitHub 訪問
+- 必要時設定 `GITHUB_TOKEN`
 
-## 最小配置
+## 最小設定
 
 ```bash
 export GITHUB_TOKEN="your_github_token"
 ```
 
-如果你当前机器无法稳定访问 GitHub，这个 plugin 的体验会明显受影响。
+如果你當前機器無法穩定訪問 GitHub，這個 plugin 的體驗會明顯受影響。
 
-## 一个最小使用流程
+## 一個最小使用流程
 
-### 1. 安装 plugin
+### 1. 安裝 plugin
 
 ```text
 /plugin install pr-review
 ```
 
-### 2. 在代码改动或 PR 场景中执行
+### 2. 在程式碼改動或 PR 場景中執行
 
 ```text
 /review-pr
 ```
 
-### 3. Claude 通常会做什么
+### 3. Claude 通常會做什麼
 
-1. 收集当前改动或 PR 上下文
-2. 分别调用安全、测试、性能相关 agents
-3. 汇总问题并输出优先级建议
+1. 收集當前改動或 PR 上下文
+2. 分別呼叫安全、測試、效能相關 agents
+3. 彙總問題並輸出優先順序建議
 
-## 什么时候最适合用
+## 什麼時候最適合用
 
-- 发 PR 前做一次结构化审查
-- 你怀疑改动对安全或测试有影响
-- 团队想形成相对固定的审查模板
+- 發 PR 前做一次結構化審查
+- 你懷疑改動對安全或測試有影響
+- 團隊想形成相對固定的審查範本
 
-## 常见坑
+## 常見坑
 
-### 1. 没有 `GITHUB_TOKEN`
+### 1. 沒有 `GITHUB_TOKEN`
 
-如果你的流程依赖 GitHub 数据，这会直接影响插件能力。
+如果你的流程依賴 GitHub 資料，這會直接影響外掛能力。
 
-### 2. 以为它会替代人工 review
+### 2. 以為它會替代人工 review
 
-这个 plugin 更适合作为结构化预审查，而不是替代所有人工判断。
+這個 plugin 更適合作為結構化預審查，而不是替代所有人工判斷。
 
-### 3. 当前目录不是 Git 仓库
+### 3. 當前目錄不是 Git 倉庫
 
-很多审查能力都默认建立在 Git 工作流之上。
+很多審查能力都預設建立在 Git 工作流之上。

@@ -1,19 +1,19 @@
 ---
 name: brand-voice-consistency
-description: 保持品牌语气和写作风格一致。Use when creating marketing copy, customer communication, public-facing content, or when users mention brand voice, tone, or writing style.
+description: 保持品牌語氣和寫作風格一致。Use when creating marketing copy, customer communication, public-facing content, or when users mention brand voice, tone, or writing style.
 ---
 
 # Brand Voice Skill
 
-## 概览
+## 概覽
 
-这个 skill 用于确保所有对外表达保持统一的 brand voice、tone 和 messaging。
+這個 skill 用於確保所有對外表達保持統一的 brand voice、tone 和 messaging。
 
 ## Brand Identity
 
 ### Mission
 
-帮助团队用 AI 自动化开发工作流
+幫助團隊用 AI 自動化開發工作流
 
 ### Values
 
@@ -23,27 +23,27 @@ description: 保持品牌语气和写作风格一致。Use when creating marketi
 
 ### Tone of Voice
 
-- 友好但专业
-- 清晰简洁
-- 自信但不过度夸张
-- 能理解用户痛点
+- 友好但專業
+- 清晰簡潔
+- 自信但不過度誇張
+- 能理解使用者痛點
 
 ## Writing Guidelines
 
 ### Do's
 
-- 面向读者说“你”
-- 多用主动语态
-- 开头先讲价值
-- 多给具体例子
-- 句子尽量简洁
+- 面向讀者說“你”
+- 多用主動語態
+- 開頭先講價值
+- 多給具體範例
+- 句子儘量簡潔
 
 ### Don'ts
 
-- 避免企业黑话
-- 避免居高临下
-- 避免空洞夸张词
-- 避免大段无层次文本
+- 避免企業黑話
+- 避免居高臨下
+- 避免空洞誇張詞
+- 避免大段無層次文字
 
 ## Vocabulary
 

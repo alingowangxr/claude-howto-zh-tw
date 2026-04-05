@@ -1,14 +1,14 @@
 ---
 name: Incident Response
-description: 用结构化流程处理生产事故
+description: 用結構化流程處理生產事故
 ---
 
-# Incident Response / 事故响应
+# Incident Response / 事故響應
 
-1. 创建 incident 记录
-2. 判断严重级别和影响面
+1. 建立 incident 記錄
+2. 判斷嚴重級別和影響面
 3. 通知 on-call
-4. 收集诊断信息
-5. 协调处置
-6. 记录解决方案
+4. 收集診斷資訊
+5. 協調處置
+6. 記錄解決方案
 7. 安排 post-mortem

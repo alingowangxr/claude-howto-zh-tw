@@ -5,48 +5,48 @@
 
 # MCP 指南
 
-MCP（Model Context Protocol）是 Claude Code 用来接入外部工具、服务和实时数据的协议。你可以把它理解成：Claude 不只是“聊天”，而是真的能通过标准接口去访问 GitHub、数据库、文件系统等外部能力。
+MCP（Model Context Protocol）是 Claude Code 用來接入外部工具、服務和實時資料的協議。你可以把它理解成：Claude 不只是“聊天”，而是真的能透過標準介面去訪問 GitHub、資料庫、檔案系統等外部能力。
 
 ---
 
-## MCP 解决什么问题
+## MCP 解決什麼問題
 
-如果没有 MCP，Claude 只能基于你提供的上下文回答。  
+如果沒有 MCP，Claude 只能基於你提供的上下文回答。  
 有了 MCP，它可以：
 
-- 获取实时数据
-- 调用外部工具
-- 访问项目外的信息源
-- 把结果带回当前工作流
+- 獲取實時資料
+- 呼叫外部工具
+- 訪問專案外的資訊源
+- 把結果帶回當前工作流
 
-和 memory 的区别很简单：
+和 memory 的區別很簡單：
 
-- memory 适合长期稳定规则
-- MCP 适合实时、外部、动态数据
-
----
-
-## MCP 常见应用场景
-
-- GitHub PR / issue 查询
-- 数据库读写
-- 文件系统访问
-- Slack / Docs / 其他 SaaS 工具集成
+- memory 適合長期穩定規則
+- MCP 適合實時、外部、動態資料
 
 ---
 
-## 本目录里的示例配置
+## MCP 常見應用場景
 
-| 文件 | 用途 |
+- GitHub PR / issue 查詢
+- 資料庫讀寫
+- 檔案系統訪問
+- Slack / Docs / 其他 SaaS 工具整合
+
+---
+
+## 本目錄裡的範例設定
+
+| 檔案 | 用途 |
 |------|------|
-| `github-mcp.json` | GitHub MCP 配置 |
-| `database-mcp.json` | 数据库 MCP 配置 |
-| `filesystem-mcp.json` | 文件系统 MCP 配置 |
-| `multi-mcp.json` | 多个 MCP server 组合示例 |
+| `github-mcp.json` | GitHub MCP 設定 |
+| `database-mcp.json` | 資料庫 MCP 設定 |
+| `filesystem-mcp.json` | 檔案系統 MCP 設定 |
+| `multi-mcp.json` | 多個 MCP server 組合範例 |
 
 ---
 
-## 最常见的安装方式
+## 最常見的安裝方式
 
 ### HTTP transport
 
@@ -68,16 +68,16 @@ claude mcp add --transport ws realtime-server wss://example.com/mcp
 
 ---
 
-## 直接复制示例配置
+## 直接複製範例設定
 
-如果你只想先试 GitHub MCP：
+如果你只想先試 GitHub MCP：
 
 ```bash
 export GITHUB_TOKEN="your_token"
 cp 05-mcp/github-mcp.json .mcp.json
 ```
 
-如果你想一次挂多个服务：
+如果你想一次掛多個服務：
 
 ```bash
 cp 05-mcp/multi-mcp.json .mcp.json
@@ -85,86 +85,86 @@ cp 05-mcp/multi-mcp.json .mcp.json
 
 ---
 
-## 哪些内容不能翻
+## 哪些內容不能翻
 
-MCP 配置是高风险文件，以下内容默认不要翻：
+MCP 設定是高風險檔案，以下內容預設不要翻：
 
 - `mcpServers`
-- server 名称，例如 `github`
+- server 名稱，例如 `github`
 - `command`
 - `args`
 - `env`
-- 环境变量名，例如 `GITHUB_TOKEN`
+- 環境變數名，例如 `GITHUB_TOKEN`
 
-正文解释可以中文化，但 JSON key 和 server 名称不要改。
+正文解釋可以中文化，但 JSON key 和 server 名稱不要改。
 
 ---
 
-## 中国用户特别注意
+## 新手使用者特別注意
 
-### 1. 网络和代理
+### 1. 網路和代理程式
 
-很多 MCP server 依赖：
+很多 MCP server 依賴：
 
 - `npx`
 - 外部 API
-- GitHub 或第三方服务
+- GitHub 或第三方服務
 
-如果你在中国网络环境下第一次执行慢、失败、超时，优先检查：
+如果你在臺灣網路環境下第一次執行慢、失敗、超時，優先檢查：
 
-- 代理设置
-- npm registry / Node 环境
-- GitHub 访问
-- 证书与公司网络策略
+- 代理程式設定
+- npm registry / Node 環境
+- GitHub 訪問
+- 證書與公司網路策略
 
-### 2. Token 和权限
+### 2. Token 和許可權
 
-例如 GitHub MCP 最常见的失败原因是：
+例如 GitHub MCP 最常見的失敗原因是：
 
-- `GITHUB_TOKEN` 没设置
-- token scope 不够
-- 环境变量只在一个 shell 会话里设置了
+- `GITHUB_TOKEN` 沒設定
+- token scope 不夠
+- 環境變數只在一個 shell 會話裡設定了
 
-### 3. Windows / WSL 差异
+### 3. Windows / WSL 差異
 
-如果你在原生 Windows 上运行 `npx` MCP server，有时需要参考官方建议用 `cmd /c` 风格处理。
+如果你在原生 Windows 上執行 `npx` MCP server，有時需要參考官方建議用 `cmd /c` 風格處理。
 
 ---
 
-## memory 和 MCP 怎么选
+## memory 和 MCP 怎麼選
 
 ### 用 memory
 
-- 项目规则
-- 团队约定
-- 长期稳定背景信息
+- 專案規則
+- 團隊約定
+- 長期穩定背景資訊
 
 ### 用 MCP
 
-- GitHub / 数据库 / 文件系统 / 第三方平台
-- 需要实时查询
-- 需要读写工具结果
+- GitHub / 資料庫 / 檔案系統 / 第三方平臺
+- 需要實時查詢
+- 需要讀寫工具結果
 
 ---
 
-## 常见坑
+## 常見坑
 
-### 1. 把 JSON 配置翻译掉
+### 1. 把 JSON 設定翻譯掉
 
-这会直接导致 MCP 无法加载。
+這會直接導致 MCP 無法載入。
 
-### 2. 忘记导出环境变量
+### 2. 忘記匯出環境變數
 
-配置文件写对了，Claude 也会因为 token 缺失而连不上。
+設定檔案寫對了，Claude 也會因為 token 缺失而連不上。
 
-### 3. 一上来就接很多服务
+### 3. 一上來就接很多服務
 
-推荐先接最核心的一个，例如 GitHub 或 filesystem，确认跑通后再扩展。
+推薦先接最核心的一個，例如 GitHub 或 filesystem，確認跑通後再擴充套件。
 
 ---
 
-## 推荐下一步
+## 推薦下一步
 
-- 想让 Claude 自动在关键时机跑脚本：看 [06-hooks](../06-hooks/)
+- 想讓 Claude 自動在關鍵時機跑腳本：看 [06-hooks](../06-hooks/)
 - 想把 MCP 和 commands / agents 一起打包：看 [07-plugins](../07-plugins/)
-- 想快速查常见配置：看 [QUICK_REFERENCE.md](../QUICK_REFERENCE.md)
+- 想快速查常見設定：看 [QUICK_REFERENCE.md](../QUICK_REFERENCE.md)

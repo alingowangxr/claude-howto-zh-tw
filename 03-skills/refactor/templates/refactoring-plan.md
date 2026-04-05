@@ -1,11 +1,11 @@
-# Refactoring Plan Template / 重构计划模板
+# Refactoring Plan Template / 重構計劃範本
 
 ## Project Information
 
 | Field | Value |
 |-------|-------|
-| **Project/Module** | [项目名] |
-| **Target Files** | [需要重构的文件] |
+| **Project/Module** | [專案名] |
+| **Target Files** | [需要重構的檔案] |
 | **Date Created** | [日期] |
 | **Author** | [作者] |
 | **Status** | Draft / In Review / Approved / In Progress / Completed |
@@ -16,9 +16,9 @@
 
 ### Goals
 
-- [ ] [目标 1]
-- [ ] [目标 2]
-- [ ] [目标 3]
+- [ ] [目標 1]
+- [ ] [目標 2]
+- [ ] [目標 3]
 
 ### Constraints
 

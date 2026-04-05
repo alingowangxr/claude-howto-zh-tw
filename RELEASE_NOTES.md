@@ -1,60 +1,60 @@
 # Release Notes
 
-## v1.0.0 — 首个中文本土化发布
+## v1.0.0 — 首個繁體中文化釋出
 
-这是 `claude-howto-zh-cn` 的首个正式发布版本。
+這是 `claude-howto-zh-tw` 的首個正式釋出版本。
 
-本次发布的目标不是做“逐句翻译镜像”，而是把上游项目重构成一个 **更适合中国小白长期学习、同时保留真实可用性的 Claude Code 中文全面上手指南**。
+本次釋出的目標不是做“逐句翻譯映象”，而是把上游專案重構成一個 **更適合初學者長期學習、同時保留真實可用性的 Claude Code 中文全面上手指南**。
 
-## 本版重点
+## 本版重點
 
-### 1. 中文主线入口完成
+### 1. 中文主線入口完成
 
 - `README`
 - `LEARNING-ROADMAP`
 - `QUICK_REFERENCE`
 - `CATALOG`
-- 核心模块 `README`
+- 核心模組 `README`
 
-这些入口文档现在已经统一成中文主线表达，学习路径、安装方式、使用场景和常见坑更贴近中文用户阅读习惯。
+這些入口檔案現在已經統一成中文主線表達，學習路徑、安裝方式、使用場景和常見坑更貼近中文使用者閱讀習慣。
 
-### 2. 执行型文档完成兼容性收口
+### 2. 執行型檔案完成相容性收口
 
-- 保留命令名、frontmatter key、JSON/YAML key、CLI flags、环境变量等关键标识
-- 修复了不应被中文化的显示标识
-- 自动触发类 descriptions 补回英文触发短语
+- 保留命令名、frontmatter key、JSON/YAML key、CLI flags、環境變數等關鍵標識
+- 修復了不應被中文化的顯示標識
+- 自動觸發類 descriptions 補回英文觸發短語
 
-目标是避免“看起来翻译对了，但复制就跑不起来”的问题。
+目標是避免“看起來翻譯對了，但複製就跑不起來”的問題。
 
-### 3. 互动学习能力补回完整结构
+### 3. 互動學習能力補回完整結構
 
-- `self-assessment` 恢复为完整自测流程
-- `lesson-quiz` 恢复为完整 lesson 测验流程
-- 题库恢复为结构化格式，并统一评分口径
+- `self-assessment` 復原為完整自測流程
+- `lesson-quiz` 復原為完整 lesson 測驗流程
+- 題庫復原為結構化格式，並統一評分口徑
 
-### 4. 发布前护栏已落地
+### 4. 釋出前護欄已落地
 
-- 本地化校验脚本：`scripts/validate_localization.py`
-- 对应测试已补齐
-- CI / docs-check 工作流已扩展
+- 在地化校驗腳本：`scripts/validate_localization.py`
+- 對應測試已補齊
+- CI / docs-check 工作流已擴充套件
 
-## 自动验证
+## 自動驗證
 
-本版发布前已通过：
+本版釋出前已透過：
 
 ```bash
 uv run python scripts/validate_localization.py
 uv run pytest scripts/tests/ -q
 ```
 
-## 适合谁
+## 適合誰
 
-- 想系统学 Claude Code 的中文用户
-- 想把上游项目改成中文团队教材的人
-- 想保留真实命令和配置兼容性的本土化维护者
+- 想系統學 Claude Code 的中文使用者
+- 想把上游專案改成中文團隊教材的人
+- 想保留真實命令和設定相容性的本土化維護者
 
-## 说明
+## 說明
 
-- 本项目为 **非官方中文本土化 fork**
-- 来源与同步策略见 `UPSTREAM.md`
-- 本地化边界与术语规则见 `LOCALIZATION-STYLE.md`
+- 本專案為 **非官方繁體中文化 fork**
+- 來源與同步策略見 `UPSTREAM.md`
+- 在地化邊界與術語規則見 `LOCALIZATION-STYLE.md`

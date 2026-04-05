@@ -1,11 +1,11 @@
 # Testing Guide
 
-本项目的测试主要覆盖两类内容：
+本專案的測試主要覆蓋兩類內容：
 
-- Python 脚本与 EPUB 构建
-- 本地化校验脚本与相关守护逻辑
+- Python 腳本與 EPUB 構建
+- 在地化校驗腳本與相關守護邏輯
 
-## 本地运行
+## 本機執行
 
 ```bash
 uv venv
@@ -14,8 +14,8 @@ uv run pytest scripts/tests/ -v
 uv run python scripts/validate_localization.py
 ```
 
-## 关注点
+## 關注點
 
-- EPUB 是否还能正常构建
-- 中文化是否破坏 frontmatter、JSON/YAML、shell 脚本
-- 关键受保护标识是否还存在
+- EPUB 是否還能正常構建
+- 中文化是否破壞 frontmatter、JSON/YAML、shell 腳本
+- 關鍵受保護標識是否還存在

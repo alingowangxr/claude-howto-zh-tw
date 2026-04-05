@@ -5,38 +5,38 @@
 
 # Skills 指南
 
-skills 是 Claude Code 里最值得认真掌握的能力之一。它们让 Claude 不再只是“每次重新听你描述要求”，而是能在合适场景下自动拿出一套固定工作流、模板和最佳实践。
+skills 是 Claude Code 裡最值得認真掌握的能力之一。它們讓 Claude 不再只是“每次重新聽你描述要求”，而是能在合適場景下自動拿出一套固定工作流、範本和最佳實踐。
 
 ---
 
-## skills 是什么
+## skills 是什麼
 
 你可以把 skill 理解成：
 
-- 一个带 frontmatter 的 `SKILL.md`
-- 可附带脚本、模板、参考资料
-- 会被 Claude 自动发现和按需加载
-- 更适合长期复用的工作流能力
+- 一個帶 frontmatter 的 `SKILL.md`
+- 可附帶腳本、範本、參考資料
+- 會被 Claude 自動發現和按需載入
+- 更適合長期複用的工作流能力
 
-和普通 prompt 相比，skills 更稳定、更易复用，也更适合团队共享。
-
----
-
-## skills 为什么重要
-
-当你开始频繁做这些事时，skills 的价值就非常明显：
-
-- 代码审查
-- 文档生成
-- 代码重构
-- 品牌语气统一
-- 项目初始化或规范生成
-
-如果每次都靠你手打一大段提示词，既累，也不稳定。skill 的目标就是把这部分沉淀下来。
+和普通 prompt 相比，skills 更穩定、更易複用，也更適合團隊共享。
 
 ---
 
-## 一个 skill 的基本结构
+## skills 為什麼重要
+
+當你開始頻繁做這些事時，skills 的價值就非常明顯：
+
+- 程式碼審查
+- 檔案生成
+- 程式碼重構
+- 品牌語氣統一
+- 專案初始化或規範生成
+
+如果每次都靠你手打一大段提示詞，既累，也不穩定。skill 的目標就是把這部分沉澱下來。
+
+---
+
+## 一個 skill 的基本結構
 
 ```text
 skill-name/
@@ -46,66 +46,66 @@ skill-name/
 └── references/
 ```
 
-### `SKILL.md` 负责什么
+### `SKILL.md` 負責什麼
 
-- 定义 skill 名称
-- 说明 skill 在什么情况下应该触发
-- 告诉 Claude 该怎么做
+- 定義 skill 名稱
+- 說明 skill 在什麼情況下應該觸發
+- 告訴 Claude 該怎麼做
 
-### 其他目录负责什么
+### 其他目錄負責什麼
 
-- `templates/`：输出模板
-- `scripts/`：辅助脚本
-- `references/`：参考规则或背景知识
-
----
-
-## progressive disclosure 是什么意思
-
-skills 的一个核心优点是按需加载，而不是一上来把所有内容都塞进上下文里。
-
-简单理解：
-
-1. Claude 先只知道有哪些 skills，以及它们大概干什么
-2. 真正需要某个 skill 时，再读取 `SKILL.md`
-3. 只有在需要时，才进一步读模板、脚本或参考资料
-
-这意味着你可以装很多 skills，而不会一开始就把上下文塞爆。
+- `templates/`：輸出範本
+- `scripts/`：輔助腳本
+- `references/`：參考規則或背景知識
 
 ---
 
-## skills 放哪里
+## progressive disclosure 是什麼意思
 
-| 类型 | 路径 | 适合什么 |
+skills 的一個核心優點是按需載入，而不是一上來把所有內容都塞進上下文裡。
+
+簡單理解：
+
+1. Claude 先只知道有哪些 skills，以及它們大概幹什麼
+2. 真正需要某個 skill 時，再讀取 `SKILL.md`
+3. 只有在需要時，才進一步讀範本、腳本或參考資料
+
+這意味著你可以裝很多 skills，而不會一開始就把上下文塞爆。
+
+---
+
+## skills 放哪裡
+
+| 型別 | 路徑 | 適合什麼 |
 |------|------|----------|
-| 个人级 | `~/.claude/skills/<skill-name>/SKILL.md` | 个人工作流 |
-| 项目级 | `.claude/skills/<skill-name>/SKILL.md` | 团队共享 |
-| plugin 自带 | `<plugin>/skills/...` | 和 plugin 一起分发 |
+| 個人級 | `~/.claude/skills/<skill-name>/SKILL.md` | 個人工作流 |
+| 專案級 | `.claude/skills/<skill-name>/SKILL.md` | 團隊共享 |
+| plugin 自帶 | `<plugin>/skills/...` | 和 plugin 一起分發 |
 
 ---
 
-## 本目录里的示例 skills
+## 本目錄裡的範例 skills
 
 | skill | 位置 | 用途 |
 |-------|------|------|
-| `code-review` | `03-skills/code-review/` | 代码审查 |
-| `brand-voice` | `03-skills/brand-voice/` | 文案风格统一 |
-| `doc-generator` | `03-skills/doc-generator/` | 文档生成 |
-| `refactor` | `03-skills/refactor/` | 结构化重构 |
-| `claude-md` | `03-skills/claude-md/` | 生成或调整 `CLAUDE.md` |
+| `code-review` | `03-skills/code-review/` | 程式碼審查 |
+| `brand-voice` | `03-skills/brand-voice/` | 文案風格統一 |
+| `doc-generator` | `03-skills/doc-generator/` | 檔案生成 |
+| `refactor` | `03-skills/refactor/` | 結構化重構 |
+| `claude-md` | `03-skills/claude-md/` | 生成或調整 `CLAUDE.md` |
 
 ---
 
-## 如何安装
+## 如何安裝
 
-### 安装到个人目录
+### 安裝到個人目錄
 
 ```bash
 mkdir -p ~/.claude/skills
 cp -r 03-skills/code-review ~/.claude/skills/
 ```
 
-### 安装到项目目录
+### 安裝到專案目錄
 
 ```bash
 mkdir -p .claude/skills
@@ -114,70 +114,70 @@ cp -r 03-skills/code-review .claude/skills/
 
 ---
 
-## `SKILL.md` 里哪些不能翻
+## `SKILL.md` 裡哪些不能翻
 
-这点是本地化时最容易翻坏的地方。下面这些字段要保留原样：
+這點是在地化時最容易翻壞的地方。下面這些欄位要保留原樣：
 
 - `name`
 - `description`
 - `effort`
 - `shell`
 
-同时，skill 名称本身也不要擅自中文化改名。
+同時，skill 名稱本身也不要擅自中文化改名。
 
 ---
 
-## skills 和 slash commands 的区别
+## skills 和 slash commands 的區別
 
-### 更适合用 skill 的情况
+### 更適合用 skill 的情況
 
-- 你希望 Claude 自动判断什么时候该触发
-- 你需要附带模板、脚本、参考资料
-- 这是一个长期工作流，而不是一次性快捷命令
+- 你希望 Claude 自動判斷什麼時候該觸發
+- 你需要附帶範本、腳本、參考資料
+- 這是一個長期工作流，而不是一次性快捷命令
 
-### 更适合用 slash command 的情况
+### 更適合用 slash command 的情況
 
-- 你希望自己手动明确触发
-- 它更像一个短促的操作入口
-- 你希望用户一眼知道“我要输入哪个命令”
-
----
-
-## 如何写出更好用的 skill
-
-- `description` 要具体，不要空泛
-- 一个 skill 聚焦一类问题，别做成“大杂烩”
-- 如果依赖脚本或模板，放进 skill 目录，不要散落各处
-- 优先写“什么时候触发”和“输出长什么样”
+- 你希望自己手動明確觸發
+- 它更像一個短促的操作入口
+- 你希望使用者一眼知道“我要輸入哪個命令”
 
 ---
 
-## 常见坑
+## 如何寫出更好用的 skill
 
-### 1. description 写得太泛
-
-Claude 就不知道什么时候该用它，或者会误触发。
-
-### 2. 把 skill 写成一大段散文
-
-推荐写成结构化说明，让 Claude 更容易执行。
-
-### 3. 把 frontmatter key 翻译掉
-
-这会直接让 skill 无法正确解析。
+- `description` 要具體，不要空泛
+- 一個 skill 聚焦一類問題，別做成“大雜燴”
+- 如果依賴腳本或範本，放進 skill 目錄，不要散落各處
+- 優先寫“什麼時候觸發”和“輸出長什麼樣”
 
 ---
 
-## 中国用户特别注意
+## 常見坑
 
-- skill 里如果调用 shell 脚本，先确认本机 shell 环境。
-- 如果脚本依赖 `python`、`node`、`uv`、`npm`，建议在 skill 说明里提前写明。
-- Windows 用户优先考虑 PowerShell / Git Bash / WSL 差异。
+### 1. description 寫得太泛
+
+Claude 就不知道什麼時候該用它，或者會誤觸發。
+
+### 2. 把 skill 寫成一大段散文
+
+推薦寫成結構化說明，讓 Claude 更容易執行。
+
+### 3. 把 frontmatter key 翻譯掉
+
+這會直接讓 skill 無法正確解析。
 
 ---
 
-## 推荐下一步
+## 新手使用者特別注意
 
-- 想让任务分工更专业：看 [04-subagents](../04-subagents/)
-- 想在工具调用前后做自动动作：看 [06-hooks](../06-hooks/)
-- 想继续用中文规范扩写：看 [LOCALIZATION-STYLE.md](../LOCALIZATION-STYLE.md)
+- skill 裡如果呼叫 shell 腳本，先確認本機 shell 環境。
+- 如果腳本依賴 `python`、`node`、`uv`、`npm`，建議在 skill 說明裡提前寫明。
+- Windows 使用者優先考慮 PowerShell / Git Bash / WSL 差異。
+
+---
+
+## 推薦下一步
+
+- 想讓任務分工更專業：看 [04-subagents](../04-subagents/)
+- 想在工具呼叫前後做自動動作：看 [06-hooks](../06-hooks/)
+- 想繼續用中文規範擴寫：看 [LOCALIZATION-STYLE.md](../LOCALIZATION-STYLE.md)

@@ -1,12 +1,12 @@
 ---
 name: Rollback
-description: 回滚到之前的稳定版本
+description: 回滾到之前的穩定版本
 ---
 
-# Rollback Deployment / 回滚部署
+# Rollback Deployment / 回滾部署
 
-1. 确认目标版本
-2. 检查回滚目标是否健康
-3. 执行回滚
+1. 確認目標版本
+2. 檢查回滾目標是否健康
+3. 執行回滾
 4. 做 health checks
-5. 通知团队
+5. 通知團隊

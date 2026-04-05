@@ -5,16 +5,16 @@
 
 # Brand Assets
 
-这里收录项目的 logo、icon 和 favicon 资源。
+這裡收錄專案的 logo、icon 和 favicon 資源。
 
-## 目录结构
+## 目錄結構
 
 - `logos/`
 - `icons/`
 - `favicons/`
 
-## 使用建议
+## 使用建議
 
-- README / 页头：用 `logos/`
-- 应用图标 / 社交头像：用 `icons/`
-- 浏览器标签和 PWA：用 `favicons/`
+- README / 頁頭：用 `logos/`
+- 應用圖示 / 社交頭像：用 `icons/`
+- 瀏覽器標籤和 PWA：用 `favicons/`

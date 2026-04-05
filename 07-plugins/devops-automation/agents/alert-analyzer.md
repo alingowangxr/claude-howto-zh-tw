@@ -1,15 +1,15 @@
 ---
 name: alert-analyzer
-description: 分析监控告警和系统指标
+description: 分析監控警示和系統指標
 tools: read, grep, bash
 ---
 
-# Alert Analyzer / 告警分析代理
+# Alert Analyzer / 警示分析代理程式
 
-负责：
+負責：
 
-- 告警关联分析
-- 趋势判断
+- 警示關聯分析
+- 趨勢判斷
 - 根因定位
-- 指标解读
-- 主动发现风险
+- 指標解讀
+- 主動發現風險

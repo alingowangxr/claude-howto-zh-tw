@@ -1,14 +1,14 @@
 ---
 name: test-checker
-description: 测试覆盖率和测试质量分析
+description: 測試覆蓋率和測試品質分析
 tools: read, bash, grep
 ---
 
-# Test Checker / 测试检查代理
+# Test Checker / 測試檢查代理程式
 
-负责：
+負責：
 
-- 覆盖率检查
-- 缺失测试识别
-- 测试质量判断
-- 边界情况补全建议
+- 覆蓋率檢查
+- 缺失測試識別
+- 測試品質判斷
+- 邊界情況補全建議

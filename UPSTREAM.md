@@ -1,65 +1,65 @@
 # Upstream & Fork Notes
 
-## 上游来源
+## 上游來源
 
-- 上游仓库：[`luongnv89/claude-howto`](https://github.com/luongnv89/claude-howto)
+- 上游倉庫：[`luongnv89/claude-howto`](https://github.com/luongnv89/claude-howto)
 - 上游分支：`main`
-- 本地化基线 commit：`0ca8c37c81918458e063739425c4740ca92c2db2`
-- 上游许可证：[MIT License](LICENSE)
+- 在地化基線 commit：`0ca8c37c81918458e063739425c4740ca92c2db2`
+- 上游許可證：[MIT License](LICENSE)
 
-## 本仓库性质
+## 本倉庫性質
 
-本仓库是一个 **非官方中文本土化 fork**，目标是面向中国小白用户重写 Claude Code 学习材料，同时尽量保持与上游结构、示例和运行行为兼容。
+本倉庫是一個 **非官方繁體中文化 fork**，目標是面向初學者使用者重寫 Claude Code 學習材料，同時儘量保持與上游結構、範例和執行行為相容。
 
 它不是：
 
-- 官方 Anthropic 文档
-- 上游仓库的逐字逐句翻译镜像
-- 为中国平台完全重构后的独立产品
+- 官方 Anthropic 檔案
+- 上游倉庫的逐字逐句翻譯映象
+- 為臺灣平臺完全重構後的獨立產品
 
-## 本仓库做了哪些调整
+## 本倉庫做了哪些調整
 
-- 把首页、学习路线、Quick Reference、Catalog 等核心入口文档改成中文主线。
-- 用“先讲用途，再讲安装，再讲示例和常见坑”的方式重写表达。
-- 保留目录结构、文件路径、命令名、frontmatter key、JSON/YAML key、环境变量、CLI flags 等关键兼容元素。
-- 增加中国用户常见障碍说明，例如 GitHub Token、`npm` / `npx` / `uv` / Python 环境、网络与代理、Windows / WSL 差异。
-- 增加本地化校验脚本与 CI 护栏，避免翻译把示例和配置改坏。
+- 把首頁、學習路線、Quick Reference、Catalog 等核心入口檔案改成中文主線。
+- 用“先講用途，再講安裝，再講範例和常見坑”的方式重寫表達。
+- 保留目錄結構、檔案路徑、命令名、frontmatter key、JSON/YAML key、環境變數、CLI flags 等關鍵相容元素。
+- 增加新手使用者常見障礙說明，例如 GitHub Token、`npm` / `npx` / `uv` / Python 環境、網路與代理程式、Windows / WSL 差異。
+- 增加在地化校驗腳本與 CI 護欄，避免翻譯把範例和設定改壞。
 
-## 本地化原则
+## 在地化原則
 
-1. **兼容性优先**  
-   任何会影响 Claude Code 运行、加载或复制执行的标识，默认不翻。
+1. **相容性優先**  
+   任何會影響 Claude Code 執行、載入或複製執行的標識，預設不翻。
 
-2. **中文表达优先**  
-   给人看的说明文字、学习路径、FAQ、对比表、导语等内容，以中文重写为主。
+2. **中文表達優先**  
+   給人看的說明文字、學習路徑、FAQ、對比表、導語等內容，以中文重寫為主。
 
-3. **术语保真**  
-   `skills`、`CLI`、`hooks`、`MCP`、`subagents` 这类高频术语保留英文，首次出现补中文解释。
+3. **術語保真**  
+   `skills`、`CLI`、`hooks`、`MCP`、`subagents` 這類高頻術語保留英文，首次出現補中文解釋。
 
-4. **持续同步**  
-   本仓库默认采用“跟进上游版本 -> 判定受影响文件 -> 更新中文内容 -> 记录处理结果”的维护方式。
+4. **持續同步**  
+   本倉庫預設採用“跟進上游版本 -> 判定受影響檔案 -> 更新中文內容 -> 記錄處理結果”的維護方式。
 
-## 推荐同步流程
+## 推薦同步流程
 
-1. 获取上游新版本或新 commit。
-2. 列出上游变更的文件范围。
-3. 判断哪些文件影响本仓库的中文文档、示例或校验脚本。
-4. 优先同步以下类型的变化：
-   - 命令名、字段名、协议名、路径约定
-   - 新增或废弃功能
-   - 影响复制可运行性的示例变更
-5. 更新中文文档后，运行：
+1. 獲取上游新版本或新 commit。
+2. 列出上游變更的檔案範圍。
+3. 判斷哪些檔案影響本倉庫的中檔案案、範例或校驗腳本。
+4. 優先同步以下型別的變化：
+   - 命令名、欄位名、協議名、路徑約定
+   - 新增或廢棄功能
+   - 影響複製可執行性的範例變更
+5. 更新中檔案案後，執行：
 
 ```bash
 uv run python scripts/validate_localization.py
 ```
 
-6. 在提交说明或更新日志中记录：
-   - 上游变更点
-   - 本仓库采取了什么处理
-   - 哪些内容暂时未同步
+6. 在提交說明或更新日誌中記錄：
+   - 上游變更點
+   - 本倉庫採取了什麼處理
+   - 哪些內容暫時未同步
 
-## 最近一次同步记录
+## 最近一次同步記錄
 
 ### Upstream Sync — 2026-04-01
 
@@ -71,13 +71,13 @@ uv run python scripts/validate_localization.py
   - `09-advanced-features/setup-auto-mode-permissions.py`
   - `README.md`
 - Chinese fork actions:
-  - 删除旧的 `auto-adapt-mode` hook 文件，不再继续维护“动态记忆批准”方案
-  - 新增 `09-advanced-features/setup-auto-mode-permissions.py`，同步上游的一次性权限种子脚本
-  - 在中文 `Advanced Features` 和 `Hooks` 文档中补上新的使用方式、适用场景和安全边界
-  - 在项目介绍中写明最近同步日期与本次上游更新内容
-  - 上游新增的 Trending 徽章未直接照搬，因为它描述的是上游仓库状态，而不是当前中文 fork 的状态
+  - 刪除舊的 `auto-adapt-mode` hook 檔案，不再繼續維護“動態記憶核准”方案
+  - 新增 `09-advanced-features/setup-auto-mode-permissions.py`，同步上游的一次性許可權種子腳本
+  - 在中文 `Advanced Features` 和 `Hooks` 檔案中補上新的使用方式、適用場景和安全邊界
+  - 在專案介紹中寫明最近同步日期與本次上游更新內容
+  - 上游新增的 Trending 徽章未直接照搬，因為它描述的是上游倉庫狀態，而不是當前中文 fork 的狀態
 
-## 建议记录模板
+## 建議記錄範本
 
 ```md
 ## Upstream Sync - YYYY-MM-DD
@@ -89,11 +89,11 @@ uv run python scripts/validate_localization.py
 - Chinese fork actions:
   - 同步了 MCP 章节新增字段说明
   - 保留了命令名与 JSON key 不变
-  - 补充了中国用户的安装注意事项
+  - 补充了台灣用户的安装注意事项
 ```
 
-## 额外说明
+## 額外說明
 
-- 如果你未来将本仓库发布到自己的 GitHub 账号下，建议仓库名使用 `claude-howto-zh-cn`。
-- 如果需要替换徽章、封面图、仓库 URL，请在保留来源声明的前提下调整。
-- 如果某处翻译和可执行性冲突，**优先保留原始标识**，并在正文中补中文解释。
+- 如果你未來將本倉庫釋出到自己的 GitHub 賬號下，建議倉庫名使用 `claude-howto-zh-tw`。
+- 如果需要替換徽章、封面圖、倉庫 URL，請在保留來源宣告的前提下調整。
+- 如果某處翻譯和可執行性衝突，**優先保留原始標識**，並在正文中補中文解釋。

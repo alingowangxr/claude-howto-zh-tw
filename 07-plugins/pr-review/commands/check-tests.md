@@ -1,12 +1,12 @@
 ---
 name: Test Coverage Check
-description: 检查测试覆盖率和测试质量
+description: 檢查測試覆蓋率和測試品質
 ---
 
-# Test Coverage Check / 测试覆盖检查
+# Test Coverage Check / 測試覆蓋檢查
 
-1. 查看覆盖率
-2. 找出未覆盖路径
-3. 判断测试质量
-4. 补边界情况建议
-5. 检查关键路径是否有测试
+1. 檢視覆蓋率
+2. 找出未覆蓋路徑
+3. 判斷測試品質
+4. 補邊界情況建議
+5. 檢查關鍵路徑是否有測試

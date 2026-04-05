@@ -1,18 +1,18 @@
 ---
 name: Documentation Refactor
-description: 按项目类型重组文档结构，提高可读性和可维护性
+description: 按專案型別重組檔案結構，提高可讀性和可維護性
 tags: documentation, refactoring, organization
 ---
 
-# Documentation Refactor / 文档重构
+# Documentation Refactor / 檔案重構
 
-请根据项目实际类型对文档做结构化重构：
+請根據專案實際型別對檔案做結構化重構：
 
-1. **先分析项目**：判断它是 library、API、web app、CLI 还是微服务，并识别主要读者是谁
-2. **集中整理文档**：把技术性文档归拢到 `docs/`，并补齐交叉引用
-3. **整理根目录 `README.md`**：让它只承担入口职责，包含 overview、quickstart、模块摘要、license、联系方式
-4. **补齐组件级文档**：为模块、包或服务增加 README，并写清 setup / testing / usage
-5. **按主题组织 `docs/`**：
+1. **先分析專案**：判斷它是 library、API、web app、CLI 還是微服務，並識別主要讀者是誰
+2. **集中整理檔案**：把技術性檔案歸攏到 `docs/`，並補齊交叉引用
+3. **整理根目錄 `README.md`**：讓它只承擔入口職責，包含 overview、quickstart、模組摘要、license、聯絡方式
+4. **補齊元件級檔案**：為模組、包或服務增加 README，並寫清 setup / testing / usage
+5. **按主題組織 `docs/`**：
    - Architecture
    - API Reference
    - Database
@@ -25,10 +25,10 @@ tags: documentation, refactoring, organization
    - API Documentation
    - Development Guide
    - Deployment Guide
-7. **图示统一用 Mermaid**
+7. **圖示統一用 Mermaid**
 
 要求：
 
-- 文档要短、清晰、可扫描
-- 先从项目入口和高频模块开始
-- 不要为了“看起来完整”而增加无意义章节
+- 檔案要短、清晰、可掃描
+- 先從專案入口和高頻模組開始
+- 不要為了“看起來完整”而增加無意義章節

@@ -1,18 +1,18 @@
 ---
 name: code-refactor
-description: 基于 Martin Fowler 方法论做系统化重构。Use when users ask to refactor code, improve structure, reduce technical debt, clean up legacy code, or improve maintainability.
+description: 基於 Martin Fowler 方法論做系統化重構。Use when users ask to refactor code, improve structure, reduce technical debt, clean up legacy code, or improve maintainability.
 ---
 
-# Code Refactoring Skill / 重构技能
+# Code Refactoring Skill / 重構技能
 
-这个 skill 用于安全、渐进式地做重构，重点强调：
+這個 skill 用於安全、漸進式地做重構，重點強調：
 
-- 外部行为不变
+- 外部行為不變
 - 小步迭代
-- 测试先行
-- 每个阶段都可回退
+- 測試先行
+- 每個階段都可回退
 
-## 工作流概览
+## 工作流概覽
 
 1. Research & Analysis
 2. Test Coverage Assessment
@@ -29,8 +29,8 @@ description: 基于 Martin Fowler 方法论做系统化重构。Use when users a
 4. **Continuous**
 5. **Collaborative**
 
-## 输出要求
+## 輸出要求
 
-- 先说明问题和目标
-- 再给分阶段计划
-- 每步都说明风险和验证方式
+- 先說明問題和目標
+- 再給分階段計劃
+- 每步都說明風險和驗證方式

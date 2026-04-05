@@ -1,16 +1,16 @@
-# Code Smells Catalog / 代码异味清单
+# Code Smells Catalog / 程式碼異味清單
 
-这是一个用于识别代码异味的简明参考表。
+這是一個用於識別程式碼異味的簡明參考表。
 
-## 常见 Code Smells
+## 常見 Code Smells
 
 ### Long Method
 
 **Signs**
 
-- 方法超过 30-50 行
-- 多层嵌套
-- 需要靠注释区分段落
+- 方法超過 30-50 行
+- 多層巢狀
+- 需要靠註釋區分段落
 
 **Refactorings**
 
@@ -22,9 +22,9 @@
 
 **Signs**
 
-- 字段过多
-- 方法过多
-- 职责明显混杂
+- 欄位過多
+- 方法過多
+- 職責明顯混雜
 
 **Refactorings**
 
@@ -35,8 +35,8 @@
 
 **Signs**
 
-- 用基础类型表示复杂领域概念
-- 到处都是 magic strings / numbers
+- 用基礎型別表示複雜領域概念
+- 到處都是 magic strings / numbers
 
 **Refactorings**
 
@@ -47,8 +47,8 @@
 
 **Signs**
 
-- 参数 4 个以上
-- 参数经常成组出现
+- 引數 4 個以上
+- 引數經常成組出現
 
 **Refactorings**
 
@@ -59,7 +59,7 @@
 
 **Signs**
 
-- 相同一组字段总是一起出现
+- 相同一組欄位總是一起出現
 
 **Refactorings**
 

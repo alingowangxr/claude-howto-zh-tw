@@ -1,4 +1,4 @@
-# 项目配置
+# 專案設定
 
 ## Project Overview
 
@@ -19,7 +19,7 @@
 
 - 使用 Prettier
 - 使用 ESLint + airbnb config
-- 最大行长 100
+- 最大行長 100
 - 2-space indentation
 
 ### Naming Conventions
@@ -33,52 +33,52 @@
 ### Git Workflow
 
 - 分支命名：`feature/description` 或 `fix/description`
-- 提交信息遵循 conventional commits
-- 合并前需要 PR
-- 所有 CI/CD 检查必须通过
-- 至少 1 个 approval
+- 提交資訊遵循 conventional commits
+- 合併前需要 PR
+- 所有 CI/CD 檢查必須透過
+- 至少 1 個 approval
 
 ### Testing Requirements
 
-- 最低 80% 覆盖率
-- 关键路径必须有测试
+- 最低 80% 覆蓋率
+- 關鍵路徑必須有測試
 - unit tests 用 Jest
 - E2E 用 Cypress
-- 文件命名：`*.test.ts` 或 `*.spec.ts`
+- 檔案命名：`*.test.ts` 或 `*.spec.ts`
 
 ### API Standards
 
 - 使用 RESTful endpoints
 - JSON request / response
-- 正确使用 HTTP status code
-- API 统一带版本：`/api/v1/`
-- 所有 endpoint 要有示例文档
+- 正確使用 HTTP status code
+- API 統一帶版本：`/api/v1/`
+- 所有 endpoint 要有範例檔案
 
 ### Database
 
-- schema 变更必须走 migration
-- 不允许硬编码凭证
+- schema 變更必須走 migration
+- 不允許硬編碼憑證
 - 使用 connection pooling
-- 开发环境开启 query logging
-- 定期备份
+- 開發環境開啟 query logging
+- 定期備份
 
 ### Deployment
 
 - Docker-based deployment
 - Kubernetes orchestration
 - blue-green deployment
-- 失败自动回滚
-- deploy 前先跑数据库迁移
+- 失敗自動回滾
+- deploy 前先跑資料庫遷移
 
 ## Common Commands
 
 | Command | Purpose |
 |---------|---------|
-| `npm run dev` | 启动开发服务 |
-| `npm test` | 运行测试 |
-| `npm run lint` | 检查代码风格 |
-| `npm run build` | 生产构建 |
-| `npm run migrate` | 执行数据库迁移 |
+| `npm run dev` | 啟動開發服務 |
+| `npm test` | 執行測試 |
+| `npm run lint` | 檢查程式碼風格 |
+| `npm run build` | 生產構建 |
+| `npm run migrate` | 執行資料庫遷移 |
 
 ## Team Contacts
 
@@ -88,10 +88,10 @@
 
 ## Known Issues & Workarounds
 
-- PostgreSQL 连接池高峰期限制为 20
-- 临时方案：实现 query queuing
-- Safari 14 对 async generators 有兼容性问题
-- 临时方案：使用 Babel transpiler
+- PostgreSQL 連線池高峰期限制為 20
+- 臨時方案：實現 query queuing
+- Safari 14 對 async generators 有相容性問題
+- 臨時方案：使用 Babel transpiler
 
 ## Related Projects
 

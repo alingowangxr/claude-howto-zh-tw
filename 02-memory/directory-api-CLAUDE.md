@@ -1,26 +1,26 @@
-# API 模块规则
+# API 模組規則
 
-这个文件用于覆盖根目录 `CLAUDE.md`，作用范围是 `/src/api/` 下的内容。
+這個檔案用於覆蓋根目錄 `CLAUDE.md`，作用範圍是 `/src/api/` 下的內容。
 
-## API 专属规范
+## API 專屬規範
 
 ### Request Validation
 
 - 使用 Zod 做 schema validation
-- 所有输入都必须校验
-- 校验失败返回 400
-- 错误信息尽量提供字段级细节
+- 所有輸入都必須校驗
+- 校驗失敗返回 400
+- 錯誤資訊儘量提供欄位級細節
 
 ### Authentication
 
-- 所有 endpoint 默认需要 JWT token
+- 所有 endpoint 預設需要 JWT token
 - token 放在 `Authorization` header
-- token 默认 24 小时过期
-- 实现 refresh token 机制
+- token 預設 24 小時過期
+- 實現 refresh token 機制
 
 ### Response Format
 
-所有成功响应统一遵循下面的结构：
+所有成功響應統一遵循下面的結構：
 
 ```json
 {
@@ -31,7 +31,7 @@
 }
 ```
 
-错误响应：
+錯誤響應：
 
 ```json
 {
@@ -49,19 +49,19 @@
 
 - 使用 cursor-based pagination
 - 返回 `hasMore`
-- 单页最大 100
-- 默认每页 20
+- 單頁最大 100
+- 預設每頁 20
 
 ### Rate Limiting
 
-- 登录用户每小时 1000 次
-- 公共接口每小时 100 次
+- 登入使用者每小時 1000 次
+- 公共介面每小時 100 次
 - 超限返回 429
 - 包含 `retry-after` header
 
 ### Caching
 
 - 使用 Redis 做 session caching
-- 默认缓存 5 分钟
-- 写操作后主动失效
-- cache key 带资源类型标签
+- 預設快取 5 分鐘
+- 寫操作後主動失效
+- cache key 帶資源型別標籤

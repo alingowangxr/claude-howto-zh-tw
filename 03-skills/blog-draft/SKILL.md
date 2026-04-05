@@ -1,9 +1,9 @@
 ---
 name: blog-draft
-description: 根据想法和资料起草博客文章。Use when users want to draft a blog post, write an article from research, or turn notes/resources into a structured post.
+description: 根據想法和資料起草部落格文章。Use when users want to draft a blog post, write an article from research, or turn notes/resources into a structured post.
 ---
 
-# Blog Draft / 博客草稿生成
+# Blog Draft / 部落格草稿生成
 
 ## User Input
 
@@ -11,20 +11,20 @@ description: 根据想法和资料起草博客文章。Use when users want to dr
 $ARGUMENTS
 ```
 
-用户最好提供：
+使用者最好提供：
 
-- 主题 / 想法
-- 参考资料（URL、文件、笔记）
-- 目标读者
-- 语气风格
+- 主題 / 想法
+- 參考資料（URL、檔案、筆記）
+- 目標讀者
+- 語氣風格
 
-如果用户是在修改已有草稿，直接从“迭代草稿”阶段开始。
+如果使用者是在修改已有草稿，直接從“迭代草稿”階段開始。
 
 ## Execution Flow
 
-### Step 1: 创建文章目录
+### Step 1: 建立文章目錄
 
-目录格式：
+目錄格式：
 
 ```text
 blog-posts/
@@ -32,54 +32,54 @@ blog-posts/
     └── resources/
 ```
 
-### Step 2: 整理资料
+### Step 2: 整理資料
 
-对每个资料生成摘要文件，至少包含：
+對每個資料生成摘要檔案，至少包含：
 
-- 关键观点
-- 可引用的数据或句子
-- 与主题的关联
+- 關鍵觀點
+- 可引用的資料或句子
+- 與主題的關聯
 
-### Step 3: 明确文章方向
+### Step 3: 明確文章方向
 
-整理并向用户确认：
+整理並向使用者確認：
 
-- 主要观点
-- 可选角度
-- 核心论点
-- 信息缺口
+- 主要觀點
+- 可選角度
+- 核心論點
+- 資訊缺口
 
-### Step 4: 先产出大纲
+### Step 4: 先產出大綱
 
 生成 `OUTLINE.md`，包含：
 
-- 目标读者
-- 语气
-- 目标篇幅
+- 目標讀者
+- 語氣
+- 目標篇幅
 - 核心 takeaway
-- 文章结构
-- 计划引用的资料
+- 文章結構
+- 計劃引用的資料
 
-### Step 5: 写草稿
+### Step 5: 寫草稿
 
-按大纲生成 `draft-v0.1.md`，要求：
+按大綱生成 `draft-v0.1.md`，要求：
 
-- 有吸引人的开头
-- 结构清晰
-- 有证据和例子
-- 重要事实带引用
-- 结尾有总结或行动建议
+- 有吸引人的開頭
+- 結構清晰
+- 有證據和範例
+- 重要事實帶引用
+- 結尾有總結或行動建議
 
 ### Step 6: 迭代
 
-如果用户要求修改：
+如果使用者要求修改：
 
-- 记录反馈
-- 递增版本号
-- 保存为 `draft-v0.2.md`、`draft-v0.3.md`
+- 記錄回饋
+- 遞增版本號
+- 儲存為 `draft-v0.2.md`、`draft-v0.3.md`
 
-## 输出要求
+## 輸出要求
 
-- 先给结构，再写全文
+- 先給結構，再寫全文
 - 引用要清楚
-- 表达可以中文化，但文件和目录命名保持可管理
+- 表達可以中文化，但檔案和目錄命名保持可管理

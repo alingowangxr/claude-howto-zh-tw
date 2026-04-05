@@ -2,11 +2,11 @@
 
 ## Description
 
-简要说明这个 endpoint 的作用。
+簡要說明這個 endpoint 的作用。
 
 ## Authentication
 
-说明鉴权方式，例如 Bearer token。
+說明鑑權方式，例如 Bearer token。
 
 ## Parameters
 

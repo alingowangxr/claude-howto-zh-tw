@@ -3,46 +3,46 @@
   <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# EPUB 构建脚本与本地化校验脚本
+# EPUB 構建腳本與在地化校驗腳本
 
-这个目录现在主要包含两类脚本：
+這個目錄現在主要包含兩類腳本：
 
-- `build_epub.py`：把仓库内的 Markdown 文档打包成 EPUB
-- `validate_localization.py`：校验中文本土化过程中是否把可执行标识、链接或配置翻坏
+- `build_epub.py`：把倉庫內的 Markdown 檔案打包成 EPUB
+- `validate_localization.py`：校驗繁體中文化過程中是否把可執行標識、連結或設定翻壞
 
 ---
 
 ## `build_epub.py`
 
-用于把整个指南打包成 EPUB 电子书。
+用於把整個指南打包成 EPUB 電子書。
 
-当前默认会优先使用仓库里的固定封面图：
+當前預設會優先使用倉庫裡的固定封面圖：
 
 `assets/cover/epub-cover-official.png`
 
-如果这个文件存在，就直接作为 EPUB 封面；如果不存在，才回退到脚本自动生成封面。
+如果這個檔案存在，就直接作為 EPUB 封面；如果不存在，才回退到腳本自動生成封面。
 
 ### 功能
 
-- 按目录结构组织章节
-- 把 Mermaid 图通过 Kroki.io 渲染成图片
+- 按目錄結構組織章節
+- 把 Mermaid 圖透過 Kroki.io 渲染成圖片
 - 生成封面
-- 处理内部 Markdown 链接
-- 在构建失败时明确报错
+- 處理內部 Markdown 連結
+- 在構建失敗時明確報錯
 
-### 依赖
+### 依賴
 
 - Python 3.10+
 - [uv](https://github.com/astral-sh/uv)
-- 可访问 Kroki.io 的网络环境
+- 可訪問 Kroki.io 的網路環境
 
-### 快速开始
+### 快速開始
 
 ```bash
 uv run scripts/build_epub.py
 ```
 
-### 常见选项
+### 常見選項
 
 ```text
 usage: build_epub.py [-h] [--root ROOT] [--output OUTPUT] [--verbose]
@@ -50,13 +50,13 @@ usage: build_epub.py [-h] [--root ROOT] [--output OUTPUT] [--verbose]
 ```
 
 ```bash
-# 查看详细日志
+# 檢視詳細記錄檔
 uv run scripts/build_epub.py --verbose
 
-# 自定义输出位置
+# 自定義輸出位置
 uv run scripts/build_epub.py --output ~/Desktop/claude-guide.epub
 
-# 如果遇到速率限制，降低并发
+# 如果遇到速率限制，降低併發
 uv run scripts/build_epub.py --max-concurrent 5
 ```
 
@@ -64,70 +64,70 @@ uv run scripts/build_epub.py --max-concurrent 5
 
 ## `validate_localization.py`
 
-用于在中文本土化过程中做“翻译后验活”，避免这些问题：
+用於在繁體中文化過程中做“翻譯後驗活”，避免這些問題：
 
-- 内部 Markdown 链接失效
-- YAML frontmatter 被改坏
-- JSON / YAML 无法解析
-- shell 脚本语法损坏
-- 关键命令名、字段名、环境变量名、plugin manifest 标识被误改
+- 內部 Markdown 連結失效
+- YAML frontmatter 被改壞
+- JSON / YAML 無法解析
+- shell 腳本語法損壞
+- 關鍵命令名、欄位名、環境變數名、plugin manifest 標識被誤改
 
-### 快速开始
+### 快速開始
 
 ```bash
 uv run python scripts/validate_localization.py
 ```
 
-### 它会检查什么
+### 它會檢查什麼
 
-- Markdown 相对链接
+- Markdown 相對連結
 - frontmatter 合法性
-- `.json` / `.yml` / `.yaml` 语法
+- `.json` / `.yml` / `.yaml` 語法
 - `*.sh` 的 `bash -n`
-- 关键 protected tokens
+- 關鍵 protected tokens
 
-### 什么时候运行
+### 什麼時候執行
 
-- 每次大规模翻译或重写之后
-- 每次修改 `SKILL.md`、subagent、slash command 或 plugin manifest 之后
-- 每次准备提交前
-- 每次同步上游变更后
+- 每次大規模翻譯或重寫之後
+- 每次修改 `SKILL.md`、subagent、slash command 或 plugin manifest 之後
+- 每次準備提交前
+- 每次同步上游變更後
 
 ---
 
-## 本地开发
+## 本機開發
 
 ```bash
-# 创建虚拟环境
+# 建立虛擬環境
 uv venv
 
-# 激活并安装依赖
+# 啟用並安裝相依
 source .venv/bin/activate
 uv pip install -r scripts/requirements-dev.txt
 
-# 运行全部测试
+# 執行全部測試
 pytest scripts/tests/ -v
 
-# 运行本地化校验
+# 執行本地化校驗
 uv run python scripts/validate_localization.py
 
-# 构建 EPUB
+# 構建 EPUB
 python scripts/build_epub.py
 ```
 
 ---
 
-## 常见问题
+## 常見問題
 
-**EPUB 构建失败且提示网络错误**  
-先检查网络、代理以及 Kroki.io 是否可访问，可以尝试提高 `--timeout`。
+**EPUB 構建失敗且提示網路錯誤**  
+先檢查網路、代理程式以及 Kroki.io 是否可訪問，可以嘗試提高 `--timeout`。
 
-**本地化校验失败**  
-优先检查：
+**在地化校驗失敗**  
+優先檢查：
 
-- 是否把 `/optimize`、`/pr`、`claude -p` 这类命令改坏了
-- 是否把 `allowed-tools`、`tools`、`model`、`env` 这类字段翻译掉了
-- 是否删掉了 `GITHUB_TOKEN`、`mcpServers`、`license` 等受保护标识
+- 是否把 `/optimize`、`/pr`、`claude -p` 這類命令改壞了
+- 是否把 `allowed-tools`、`tools`、`model`、`env` 這類欄位翻譯掉了
+- 是否刪掉了 `GITHUB_TOKEN`、`mcpServers`、`license` 等受保護標識
 
-**中文内容导致拼写检查报错**  
-仓库已对中文字符做了忽略处理；如果仍然报错，多半是英文术语或项目名新增了未收录词条。
+**中文內容導致拼寫檢查報錯**  
+倉庫已對中文字元做了忽略處理；如果仍然報錯，多半是英文術語或專案名新增了未收錄詞條。

@@ -4,11 +4,11 @@
 
 | Attribute | Value |
 |-----------|-------|
-| **Target Audience** | [这篇文章写给谁] |
+| **Target Audience** | [這篇文章寫給誰] |
 | **Tone** | [Formal / Casual / Technical / Conversational] |
-| **Target Length** | [目标字数] |
-| **Main Takeaway** | [一句话总结读者应该记住什么] |
-| **Keywords** | [可选 SEO 关键词] |
+| **Target Length** | [目標字數] |
+| **Main Takeaway** | [一句話總結讀者應該記住什麼] |
+| **Keywords** | [可選 SEO 關鍵詞] |
 
 ---
 
@@ -16,8 +16,8 @@
 
 ### 1. Introduction / Hook
 
-- 开场切入方式
-- 为什么现在值得讨论
+- 開場切入方式
+- 為什麼現在值得討論
 - 文章主旨
 
 ### 2. [Section Title]
@@ -34,9 +34,9 @@
 
 ### 4. Conclusion
 
-- 回顾关键观点
-- 最终 takeaway
-- 行动建议
+- 回顧關鍵觀點
+- 最終 takeaway
+- 行動建議
 
 ---
 

@@ -1,33 +1,33 @@
-# Planning Mode 示例
+# Planning Mode 範例
 
-这里给一些 planning mode 的典型用法示例，帮助你理解什么时候值得先规划再执行。
+這裡給一些 planning mode 的典型用法範例，幫助你理解什麼時候值得先規劃再執行。
 
-## Example 1: 构建 REST API
+## Example 1: 構建 REST API
 
-使用 `/plan` 后，Claude 应该先输出：
+使用 `/plan` 後，Claude 應該先輸出：
 
-- 分阶段计划
-- 需要创建哪些文件
-- 核心技术选型
-- 风险点
-- 预计工作量
+- 分階段計劃
+- 需要建立哪些檔案
+- 核心技術選型
+- 風險點
+- 預計工作量
 
-而不是直接开始写代码。
+而不是直接開始寫程式碼。
 
-## Example 2: 数据库迁移
+## Example 2: 資料庫遷移
 
-面对 MongoDB → PostgreSQL 这类高风险任务，planning mode 应该先明确：
+面對 MongoDB → PostgreSQL 這類高風險任務，planning mode 應該先明確：
 
-- 分阶段迁移策略
+- 分階段遷移策略
 - dual-write / rollback 方案
-- 数据一致性检查
-- cutover 节点
+- 資料一致性檢查
+- cutover 節點
 
-## Example 3: 前端大规模重构
+## Example 3: 前端大規模重構
 
-例如 class components → hooks，规划里应该先给：
+例如 class components → hooks，規劃裡應該先給：
 
-- 组件盘点
-- 复杂度分级
-- 迁移顺序
-- 测试与回退策略
+- 元件盤點
+- 複雜度分級
+- 遷移順序
+- 測試與回退策略

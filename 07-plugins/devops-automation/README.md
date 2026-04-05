@@ -3,17 +3,17 @@
   <img alt="Claude How To" src="../../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# DevOps Automation 插件
+# DevOps Automation 外掛
 
-这是一个把部署、回滚、状态检查和 incident 响应打包到一起的 DevOps plugin。
+這是一個把部署、回滾、狀態檢查和 incident 響應打包到一起的 DevOps plugin。
 
 ## Features
 
-- 自动部署
-- 回滚流程
-- 系统健康检查
-- incident 响应
-- Kubernetes 集成
+- 自動部署
+- 回滾流程
+- 系統健康檢查
+- incident 響應
+- Kubernetes 整合
 
 ## Installation
 
@@ -39,33 +39,33 @@
 ## Requirements
 
 - `kubectl`
-- 已配置集群访问
-- 必要时设置 `KUBECONFIG`
+- 已設定叢集訪問
+- 必要時設定 `KUBECONFIG`
 
-## 最小配置
+## 最小設定
 
 ```bash
 export KUBECONFIG=~/.kube/config
 kubectl get pods
 ```
 
-在真正使用 plugin 前，最好先确认 `kubectl` 本身可用、目标集群可连。
+在真正使用 plugin 前，最好先確認 `kubectl` 本身可用、目標叢集可連。
 
-## 一个最小使用流程
+## 一個最小使用流程
 
-### 1. 安装 plugin
+### 1. 安裝 plugin
 
 ```text
 /plugin install devops-automation
 ```
 
-### 2. 先从只读状态检查开始
+### 2. 先從只讀狀態檢查開始
 
 ```text
 /status
 ```
 
-### 3. 再尝试更高风险操作
+### 3. 再嘗試更高風險操作
 
 ```text
 /deploy staging
@@ -77,22 +77,22 @@ kubectl get pods
 /rollback production
 ```
 
-## 使用建议
+## 使用建議
 
-- 先用 `/status` 验证环境
-- 再用 staging 做演练
-- 最后才考虑 production 级命令
+- 先用 `/status` 驗證環境
+- 再用 staging 做演練
+- 最後才考慮 production 級命令
 
-## 常见坑
+## 常見坑
 
-### 1. 本地 `kubectl` 没配好
+### 1. 本機 `kubectl` 沒配好
 
-插件本身没问题，但底层依赖没通，就会显得“命令无效”。
+外掛本身沒問題，但底層依賴沒通，就會顯得“命令無效”。
 
-### 2. 直接在 production 场景试第一把
+### 2. 直接在 production 場景試第一把
 
-这不是一个适合“第一次就直接上线试”的 plugin。
+這不是一個適合“第一次就直接上線試”的 plugin。
 
-### 3. 没写清团队流程
+### 3. 沒寫清團隊流程
 
-如果团队内部的部署规范、回滚条件、incident 流程不明确，plugin 也很难替你兜底。
+如果團隊內部的部署規範、回滾條件、incident 流程不明確，plugin 也很難替你兜底。
